@@ -3,15 +3,15 @@ local state = require("state")
 
 
 
-return function(pos_x, pos_y)
+return function(pos)
     entity = {}
     entity.__index = entity
-    entity.pos = vector.new(pos_x, pos_y)
-    entity.velocity = vector.new(0, 0)
+    entity.pos = pos
+    entity.velocity = vector.new()
     entity.radius = 5
     entity.maxspeed = 200
-    entity.basespeed = 2.0
-    entity.focusspeed = 1.0
+    entity.basespeed = 2.5
+    entity.focusspeed = 1.5
 
     entity.draw = function(self)
         love.graphics.setColor(state.palette[1])
