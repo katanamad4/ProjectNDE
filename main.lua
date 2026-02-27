@@ -1,40 +1,40 @@
 
 local state = require("state")
 local input = require("input")
+local entities = require("entities")
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
 function love.load()
     -- init something here ...
     love.window.setTitle('Project Near Death Experience')
-
-    love.keyboard.keysPressed = {}
 end
 
 function love.resize(w, h)
     -- ...
 end
 
-function love.keypressed(key)
-    if key == 'escape' then
-        love.event.quit()
+love.keypressed = function(pressed_key)
+  input.press(pressed_key)
+end
+
+love.keyreleased = function(released_key)
+  input.release(released_key)
+end
+
+
+love.draw = function()
+    for _, entity in ipairs(entities) do
+        if entity.draw then entity:draw() end
     end
-
-    love.keyboard.keysPressed[key] = true
 end
 
-function love.keyboard.wasPressed(key)
-    return love.keyboard.keysPressed[key]
+
+love.update = function(dt)
+    if state.paused then
+        return
+    end
+    for _, entity in ipairs(entities) do
+        if entity.update then entity:update() end
+    end
 end
-
-function love.update(dt)
-    -- change some values based on your actions
-
-    love.keyboard.keysPressed = {}
-end
-
-function love.draw()
-    -- draw your stuff here
-    love.graphics.print('Welcome to the Love2d world!', 10, 10)
-end
-
