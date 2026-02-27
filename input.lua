@@ -14,10 +14,13 @@ local press_functions = {
     down = function()
         state.movement_vector.y = state.movement_vector.y + 1.0
     end,
+    lshift = function()
+        state.focus = true
+    end,
     escape = function()
         -- state.paused = not state.paused
         love.event.quit()
-    end
+    end,
 }
 
 local release_functions = {
@@ -33,6 +36,9 @@ local release_functions = {
     down = function()
         state.movement_vector.y = state.movement_vector.y - 1.0
     end,
+    lshift = function()
+        state.focus = false
+    end
 }
 
 

@@ -11,6 +11,7 @@ return function(pos_x, pos_y)
     entity.radius = 5
     entity.maxspeed = 200
     entity.basespeed = 2.0
+    entity.focusspeed = 1.0
 
     entity.draw = function(self)
         love.graphics.setColor(state.palette[1])
@@ -18,7 +19,11 @@ return function(pos_x, pos_y)
     end
 
     entity.update = function(self)
-        self.velocity = vector.limit(state.movement_vector, self.maxspeed) * self.basespeed
+        if state.focus then
+            self.velocity = vector.limit(state.movement_vector, self.maxspeed) * self.focusspeed
+        else
+            self.velocity = vector.limit(state.movement_vector, self.maxspeed) * self.basespeed
+        end
         self.pos = self.velocity + self.pos
     end
     return entity
