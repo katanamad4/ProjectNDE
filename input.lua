@@ -3,19 +3,19 @@ local state = require("state")
 
 local press_functions = {
     left = function()
-        state.movement_vector.x = state.movement_vector.x - 1.0
+        state.movement_vector.x = state.movement_vector.x - state.movement_multiplier
     end,
     right = function()
-        state.movement_vector.x = state.movement_vector.x + 1.0
+        state.movement_vector.x = state.movement_vector.x + state.movement_multiplier
     end,
     up = function()
-        state.movement_vector.y = state.movement_vector.y - 1.0
+        state.movement_vector.y = state.movement_vector.y - state.movement_multiplier
     end,
     down = function()
-        state.movement_vector.y = state.movement_vector.y + 1.0
+        state.movement_vector.y = state.movement_vector.y + state.movement_multiplier
     end,
     lshift = function()
-        state.focus = true
+        state.movement_multiplier = 0.5
     end,
     escape = function()
         -- state.paused = not state.paused
@@ -25,19 +25,19 @@ local press_functions = {
 
 local release_functions = {
     left = function()
-        state.movement_vector.x = state.movement_vector.x + 1.0
+        state.movement_vector.x = state.movement_vector.x + state.movement_multiplier
     end,
     right = function()
-        state.movement_vector.x = state.movement_vector.x - 1.0
+        state.movement_vector.x = state.movement_vector.x - state.movement_multiplier
     end,
     up = function()
-        state.movement_vector.y = state.movement_vector.y + 1.0
+        state.movement_vector.y = state.movement_vector.y + state.movement_multiplier
     end,
     down = function()
-        state.movement_vector.y = state.movement_vector.y - 1.0
+        state.movement_vector.y = state.movement_vector.y - state.movement_multiplier
     end,
     lshift = function()
-        state.focus = false
+        state.movement_multiplier = 1.0
     end
 }
 

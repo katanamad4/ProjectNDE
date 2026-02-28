@@ -10,6 +10,6 @@ return{
     {0.0, 0.0, 0.0, 1.0}   -- 6 black 
 	},
     movement_vector = vector.new(),
-    focus = false,
+    movement_multiplier = 1.0,
     paused = false,
 }

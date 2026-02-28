@@ -54,7 +54,7 @@ function vector:length_squared()
 end
 
 function vector:normalize()
-    local len = vector:length()
+    local len = self:length()
     if len == 0 then
         return vector.new(0, 0)
     end 
