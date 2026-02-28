@@ -31,6 +31,7 @@ end
 
 
 love.update = function(dt)
+    input.recompute_movement()
     if state.paused then
         return
     end

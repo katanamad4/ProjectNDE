@@ -1,64 +1,47 @@
 local state = require("state")
+local keybinds = require("keybinds")
 
-
-local press_functions = {
-    left = function()
-        state.movement_vector.x = state.movement_vector.x - state.movement_multiplier
-    end,
-    right = function()
-        state.movement_vector.x = state.movement_vector.x + state.movement_multiplier
-    end,
-    up = function()
-        state.movement_vector.y = state.movement_vector.y - state.movement_multiplier
-    end,
-    down = function()
-        state.movement_vector.y = state.movement_vector.y + state.movement_multiplier
-    end,
-    lshift = function()
-        state.movement_multiplier = 0.5
-    end,
-    escape = function()
-        -- state.paused = not state.paused
-        love.event.quit()
-    end,
-}
-
-local release_functions = {
-    left = function()
-        state.movement_vector.x = state.movement_vector.x + state.movement_multiplier
-    end,
-    right = function()
-        state.movement_vector.x = state.movement_vector.x - state.movement_multiplier
-    end,
-    up = function()
-        state.movement_vector.y = state.movement_vector.y + state.movement_multiplier
-    end,
-    down = function()
-        state.movement_vector.y = state.movement_vector.y - state.movement_multiplier
-    end,
-    lshift = function()
-        state.movement_multiplier = 1.0
-    end
-}
 
 
 return {
-  -- Look up in the map for actions that correspond to specific key presses
-  press = function(pressed_key)
-    if press_functions[pressed_key] then
-      press_functions[pressed_key]()
-    end
-  end,
-  -- Look up in the map for actions that correspond to specific key releases
-  release = function(released_key)
-    if release_functions[released_key] then
-      release_functions[released_key]()
-    end
-  end,
-  -- Handle window focusing/unfocusing
-  toggle_focus = function(focused)
-    if not focused then
-      state.paused = true
-    end
-  end
+    press = function(key)
+        if not state.key_map[key] then return end
+
+        local bind = keybinds[state.key_map[key]]
+        if bind and bind.press then
+            bind.press()
+        end
+    end,
+
+    release = function(key)
+        if not state.key_map[key] then return end
+
+        local bind = keybinds[state.key_map[key]]
+        if bind and bind.release then
+            bind.release()
+        end
+    end,
+
+    -- Handle window focusing/unfocusing
+    toggle_focus = function(focused)
+        if not focused then
+            state.paused = true
+            state.movement_vector.x = 0
+            state.movement_vector.y = 0
+        end
+    end,
+
+    recompute_movement = function()
+        state.movement_direction.x = 0
+        state.movement_direction.y = 0
+        if state.keys_down.move_left  then state.movement_direction.x = state.movement_direction.x - 1 end
+        if state.keys_down.move_right then state.movement_direction.x = state.movement_direction.x + 1 end
+        if state.keys_down.move_up    then state.movement_direction.y = state.movement_direction.y - 1 end
+        if state.keys_down.move_down  then state.movement_direction.y = state.movement_direction.y + 1 end
+        state.movement_multiplier = state.keys_down.focus and 0.5 or 1.0
+        state.movement_vector = vector.normalize(state.movement_direction) * state.movement_multiplier
+        if state.keys_down.quit       then love.event.quit() end
+
+    end,
+        
 }
