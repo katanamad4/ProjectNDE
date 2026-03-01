@@ -12,6 +12,11 @@ state.movement_multiplier = 1.0
 state.paused = false
 state.debug = true
 
+state.window_dimensions = vector.new(1366, 768)
+state.pf_dimensions = vector.new(math.floor(1366 / 3), 768 - 20)
+state.pf_pos = vector.new(math.floor(1366 / 3), 10)
+
+
 state.key_map = {
     left   = "move_left",
     right  = "move_right",

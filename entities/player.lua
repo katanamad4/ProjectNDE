@@ -2,7 +2,7 @@ local vector = require("vector")
 local state = require("state")
 local colision = require("colision")
 
-return function(pos, sprite, entities)
+return function(pos, sprite)
     entity = {}
     entity.__index = entity
     entity.type = "player"
