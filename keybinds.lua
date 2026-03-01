@@ -53,4 +53,10 @@ keybinds.quit = {
     end
 }
 
+keybinds.debug = {
+    press = function()
+        state.debug = not state.debug
+    end
+}
+
 return keybinds
