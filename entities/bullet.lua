@@ -11,7 +11,7 @@ return function(pos, velocity, acceleration, size, bullet_type)
     entity.bullet_type = bullet_type
 
     entity.draw = function(self)
-        love.graphics.setColor(state.palette[3])
+        love.graphics.setColor(state.palette.blue)
         love.graphics.circle("fill", self.pos.x, self.pos.y, self.size)
     end
 
