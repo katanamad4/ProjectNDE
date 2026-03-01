@@ -4,14 +4,14 @@ local state = {}
 
 
 
-state.sprites = {
-    goob = "assets/goob.png"
-}
 
+state.lives = 5
 state.movement_vector = vector.new()
 state.movement_direction = vector.new()
 state.movement_multiplier = 1.0
 state.paused = false
+state.debug = true
+
 state.key_map = {
     left   = "move_left",
     right  = "move_right",
@@ -19,10 +19,12 @@ state.key_map = {
     down   = "move_down",
     lshift = "focus",
     escape = "quit",
+    f3     = "debug",
 }
-
 state.keys_down = {}
-
+state.sprites = {
+    goob = "assets/goob.png"
+}
 state.palette = {
     -- Neutrals
     white   = {1.0, 1.0, 1.0, 1.0},
