@@ -2,7 +2,7 @@ local vector = require("vector")
 local state = require("state")
 local colision = require("colision")
 
-return function(pos, sprite, entities)
+return function(pos, sprite)
     entity = {}
     entity.__index = entity
     entity.type = "player"
@@ -38,7 +38,21 @@ return function(pos, sprite, entities)
 
     entity.update = function(self)
         self.velocity = vector.limit(state.movement_vector * self.maxspeed, self.maxspeed)
-        self.pos = self.pos + self.velocity
+        
+        if self.velocity.x + self.pos.x < state.pf_pos.x then 
+            self.velocity.x = 0 
+        end
+        if self.velocity.x + self.pos.x > state.pf_pos.x + state.pf_dimensions.x then 
+            self.velocity.x = 0 
+        end
+        if self.velocity.y + self.pos.y < state.pf_pos.y then 
+            self.velocity.y = 0 
+        end
+        if self.velocity.y + self.pos.y > state.pf_pos.y + state.pf_dimensions.y then 
+            self.velocity.y = 0 
+        end
+
+        self.pos = self.velocity + self.pos
         if self.invincible > 0 then
             self.invincible = self.invincible - 1
         end
