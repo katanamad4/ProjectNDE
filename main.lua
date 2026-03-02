@@ -16,7 +16,10 @@ function love.load(args)
             state.debug = true
         end
     end
-    
+    for key, data in pairs(state.sprites) do
+        data.image =  love.graphics.newImage(data.path)
+    end
+
 
 
 end

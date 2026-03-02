@@ -11,8 +11,8 @@ local player_entity = player(vector.new(state.pf_pos.x + state.pf_dimensions.x /
 table.insert(entities, playfield(state.pf_pos, state.pf_dimensions))
 entities.player = player_entity      -- named reference
 table.insert(entities, player_entity) -- numeric list entry
-table.insert(entities, bullet(vector.new(100, 100), vector.new(0, 0), vector.new(), 3))
-table.insert(entities, bullet(vector.new(200, 100), vector.new(2, 1), vector.new(), 3))
+table.insert(entities, bullet(vector.new(100, 100), vector.new(0, 0), vector.new(), 3, "grayball", "orange"))
+table.insert(entities, bullet(vector.new(200, 100), vector.new(0, 0), vector.new(), 3, "energyball", "red"))
 
 
 

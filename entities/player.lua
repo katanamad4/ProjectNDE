@@ -2,17 +2,19 @@ local vector = require("vector")
 local state = require("state")
 local colision = require("colision")
 
-return function(pos, sprite)
-    entity = {}
+return function(pos, sprite_key)
+    local entity = {}
     entity.__index = entity
     entity.type = "player"
     entity.pos = pos
     entity.velocity = vector.new()
     entity.radius = 4.0
     entity.maxspeed = 4.0
-    entity.sprite = love.graphics.newImage(state.sprites[sprite])
+    entity.sprite_key = sprite_key
     entity.scale = 0.8
     entity.invincible = 0
+
+
 
     entity.hit = function(self) 
         state.lives =  state.lives - 1
@@ -20,14 +22,19 @@ return function(pos, sprite)
     end
 
     entity.draw = function(self)
-        local ox = self.sprite:getWidth() / 2
-        local oy = self.sprite:getHeight() / 2
+        local sprite = state.sprites[self.sprite_key]
+        if not sprite or not sprite.image then return end
+
+        local image = sprite.image
+        local ox = image:getWidth() / 2
+        local oy = image:getHeight() / 2
+
         if self.invincible > 0 then 
             love.graphics.setColor(state.palette.red)
         else
             love.graphics.setColor(state.palette.white)
         end
-        love.graphics.draw(self.sprite, self.pos.x, self.pos.y, 0, self.scale, self.scale, ox, oy)
+        love.graphics.draw(image, self.pos.x, self.pos.y, 0, self.scale, self.scale, ox, oy)
         if state.keys_down.focus then 
             love.graphics.setColor(state.palette.red)
             love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)

@@ -28,7 +28,19 @@ state.key_map = {
 }
 state.keys_down = {}
 state.sprites = {
-    goob = "assets/goob.png"
+    goob = {
+        path = "assets/goob.png",
+        offset = vector.new(0, 0),
+        
+    },
+    grayball = {
+        path = "assets/grayball.png",
+        offset = vector.new(32, 32),
+    },
+    energyball = {
+        path = "assets/energyball.png",
+        offset = vector.new(96, 32),
+    }, 
 }
 state.palette = {
     -- Neutrals
