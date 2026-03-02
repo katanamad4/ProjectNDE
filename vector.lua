@@ -88,5 +88,13 @@ function vector:angle()
     return math.atan2(self.y, self.x)
 end
 
+function vector.from_angle(angle, length)
+    length = length or 1
+    return vector.new(
+        math.cos(angle) * length,
+        math.sin(angle) * length
+    )
+end
+
 return vector
 
