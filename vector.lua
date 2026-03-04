@@ -11,6 +11,8 @@ end
 function vector.__add(a, b)
     if type(b) == "number" then
         return vector.new(a.x + b, a.y + b)
+    elseif type(a) == "number" then
+        return vector.new(a + b.x, a + b.y)
     else
         return vector.new(a.x + b.x, a.y + b.y)
     end

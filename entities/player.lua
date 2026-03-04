@@ -9,7 +9,7 @@ return function(pos, sprite_key)
     entity.pos = pos
     entity.velocity = vector.new()
     entity.radius = 4.0
-    entity.maxspeed = 4.0
+    entity.maxspeed = 7.0
     entity.sprite_key = sprite_key
     entity.scale = 0.8
     entity.invincible = 0

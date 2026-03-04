@@ -11,6 +11,8 @@ state.movement_direction = vector.new()
 state.movement_multiplier = 1.0
 state.paused = false
 state.debug = true
+state.current_level = nil
+state.time = 0
 
 state.window_dimensions = vector.new(1366, 768)
 state.pf_dimensions = vector.new(math.floor(1366 / 3), 768 - 20)

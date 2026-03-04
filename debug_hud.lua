@@ -1,5 +1,5 @@
 local state = require("state")
-local entities = require("entities")
+
 
 local debug = {}
 
@@ -10,7 +10,7 @@ debug.entries = {
             love.graphics.print("FPS: " .. love.timer.getFPS(), 10, y)
     end,
     entities = function(self, y)
-        love.graphics.print("Entities: " .. #entities, 10, y)
+        love.graphics.print("Entities: " .. #state.current_level, 10, y)
     end,
     movement_v = function(self, y)
         if state.movement_vector then
@@ -23,7 +23,10 @@ debug.entries = {
         end
     end,
     lives = function(self, y)
-        love.graphics.print("Lives:" .. state.lives .. " invincible:" .. entities.player.invincible, 10, y)
+        love.graphics.print("Lives:" .. state.lives .. " invincible:" .. state.player.invincible, 10, y)
+    end,
+    pos = function(self, y)
+                love.graphics.print("player.pos x: " .. state.player.pos.x .. " y: " .. state.player.pos.y , 10, y)
     end,
 }
 

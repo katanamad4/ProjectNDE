@@ -1,10 +1,8 @@
 
 local state = require("state")
 local input = require("input")
-local entities = require("entities")
-local colision = require("colision")
 local debug_hud = require("debug_hud")
-
+local level = require("level")
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -19,7 +17,7 @@ function love.load(args)
     for key, data in pairs(state.sprites) do
         data.image =  love.graphics.newImage(data.path)
     end
-
+    state.current_level = level.load("level1")
 
 
 end
@@ -39,9 +37,8 @@ end
 
 
 love.draw = function()
-    for _, entity in ipairs(entities) do
-        if entity.draw then entity:draw() end
-    end 
+    state.current_level:draw()
+
     if state.debug then
         debug_hud.draw()
     end
@@ -52,21 +49,6 @@ end
 
 love.update = function(dt)
     input.recompute_movement()
-    for _, entity in ipairs(entities) do
-        if entity.update then entity:update() end
-    end
+    state.current_level:update(dt)
 
--- collision pass
-    for _, ent in ipairs(entities) do
-        if ent.type == "player" then
-            for _, other in ipairs(entities) do
-                if other.type == "bullet"
-                and colision.circle_circle(ent, other)
-                and ent.invincible <= 0
-                then
-                    ent:hit()
-                end
-            end
-        end
-    end
 end

@@ -1,5 +1,5 @@
 local colision = {}
-colision.__index = colision
+-- colision.__index = colision
 
 colision.circle_circle = function(a, b)
     local dx = b.pos.x - a.pos.x
