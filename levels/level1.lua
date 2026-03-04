@@ -1,6 +1,7 @@
 local player = require("entities/player")
 local bullet = require("entities/bullet")
 local playfield = require("entities/playefield")
+local enemy = require("entities/enemy")
 local state = require("state")
 local vector = require("vector")
 
@@ -13,12 +14,10 @@ function level.load()
     table.insert(entities, playfield(state.pf_pos, state.pf_dimensions))
     entities.player = player_entity      -- named reference
     table.insert(entities, player_entity) -- numeric list entry
-    table.insert(entities, bullet(vector.new(100, 100), vector.new(0, 0), vector.new(), 3, "grayball", "orange"))
+    -- table.insert(entities, bullet(vector.new(100, 100), vector.new(0, 0), vector.new(), 3, "grayball", "orange"))
+    table.insert(entities, enemy(vector.new(682, 200), "test", "jerky"))
+
     
-    
-    for i = 0, -200, -1 do
-        table.insert(entities, bullet(vector.new(682, 200), vector.from_angle(i), vector.new(), 3, "energyball", "orange"))
-    end
 
 
     return entities

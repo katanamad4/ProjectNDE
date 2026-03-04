@@ -1,12 +1,13 @@
 local colision = {}
--- colision.__index = colision
+colision.__index = colision
 
 colision.circle_circle = function(a, b)
-    local dx = b.pos.x - a.pos.x
-    local dy = b.pos.y - a.pos.y
-    local radii = a.radius + b.radius
-
-    return dx*dx + dy*dy < radii*radii
+    if a.radius and b.radius and a.pos and b.pos then 
+        local dx = b.pos.x - a.pos.x
+        local dy = b.pos.y - a.pos.y
+        local radii = a.radius + b.radius
+        return dx*dx + dy*dy < radii*radii
+    end 
 end
 
 colision.rect_rect = function(a, b)

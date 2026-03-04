@@ -8,7 +8,7 @@ return function(pos, sprite_key)
     entity.type = "player"
     entity.pos = pos
     entity.velocity = vector.new()
-    entity.radius = 4.0
+    entity.radius = 2.0
     entity.maxspeed = 7.0
     entity.sprite_key = sprite_key
     entity.scale = 0.8
@@ -37,9 +37,9 @@ return function(pos, sprite_key)
         love.graphics.draw(image, self.pos.x, self.pos.y, 0, self.scale, self.scale, ox, oy)
         if state.keys_down.focus then 
             love.graphics.setColor(state.palette.red)
-            love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
+            love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 2)
             love.graphics.setColor(state.palette.white)
-            love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius - 2)
+            love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 1)
         end
     end
 

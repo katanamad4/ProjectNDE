@@ -10,7 +10,7 @@ debug.entries = {
             love.graphics.print("FPS: " .. love.timer.getFPS(), 10, y)
     end,
     entities = function(self, y)
-        love.graphics.print("Entities: " .. #state.current_level, 10, y)
+        love.graphics.print("Entities: " .. #state.current_level.entities, 10, y)
     end,
     movement_v = function(self, y)
         if state.movement_vector then
@@ -33,6 +33,7 @@ debug.entries = {
 
 
 function debug.draw()
+    
     love.graphics.setColor(state.palette.green)
     local n = 0
     for _, entry in pairs(debug.entries) do

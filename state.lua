@@ -42,7 +42,11 @@ state.sprites = {
     energyball = {
         path = "assets/energyball.png",
         offset = vector.new(96, 32),
-    }, 
+    },
+    jerky = {
+        path = "assets/jerky.png",
+        offset = vector.new(64,64),
+    }
 }
 state.palette = {
     -- Neutrals
@@ -55,7 +59,7 @@ state.palette = {
     -- Primary
     red     = {1.0, 0.0, 0.0, 1.0},
     green   = {0.0, 1.0, 0.0, 1.0},
-    blue    = {0.4, 0.4, 1.0, 1.0}, -- keeping your softer blue
+    blue    = {0.4, 0.4, 1.0, 1.0},
 
     -- Secondary
     yellow  = {0.9, 1.0, 0.2, 1.0},

@@ -36,7 +36,6 @@ function level:update(dt)
     end
     state.time = state.time + 1
     state.player = state.current_level.entities.player
-
 end
 
 function level:draw()
