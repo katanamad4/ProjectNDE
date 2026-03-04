@@ -26,9 +26,9 @@ return function(pos, enemy_type, sprite_key)
 
     entity.update = function()
          if enemy_type == "test" then
-            if state.time % 2 == 0 then
-                for i = 1, 5, 1 do
-                    table.insert(state.current_level.entities, bullet(vector.new(682, 200), vector.from_angle(math.rad(i * 2 * state.time + i / 320), 3), vector.new(0,0), 3, "energyball", "orange"))
+            if state.time % 3  == 0 then
+                for i = 1, 10, 1 do
+                    table.insert(state.current_level.entities, bullet(vector.new(682, 200), vector.from_angle(math.rad(i * 2 * state.time + i / 360), 3), vector.new(0,0), 3, "energyball", "orange"))
                 end
             end
         end 

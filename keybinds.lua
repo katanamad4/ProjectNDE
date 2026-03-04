@@ -59,4 +59,10 @@ keybinds.debug = {
     end
 }
 
+keybinds.mouse = {
+    press = function()
+        state.mouse_controls = not state.mouse_controls
+    end
+}
+
 return keybinds

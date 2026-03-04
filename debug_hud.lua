@@ -15,19 +15,16 @@ debug.entries = {
     movement_v = function(self, y)
         if state.movement_vector then
             love.graphics.print(
-                "Movement: " ..
-                math.floor(state.movement_vector.x) .. ", " ..
-                math.floor(state.movement_vector.y),
-                10, y
-            )
+                "Movement: " .. state.movement_vector.x .. ", " .. state.movement_vector.y, 10, y)
         end
     end,
     lives = function(self, y)
         love.graphics.print("Lives:" .. state.lives .. " invincible:" .. state.player.invincible, 10, y)
     end,
     pos = function(self, y)
-                love.graphics.print("player.pos x: " .. state.player.pos.x .. " y: " .. state.player.pos.y , 10, y)
+        love.graphics.print("player.pos x: " .. state.player.pos.x .. " y: " .. state.player.pos.y , 10, y)
     end,
+    
 }
 
 

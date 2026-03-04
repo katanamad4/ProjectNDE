@@ -34,14 +34,18 @@ return {
     recompute_movement = function()
         state.movement_direction.x = 0
         state.movement_direction.y = 0
-        if state.keys_down.move_left  then state.movement_direction.x = state.movement_direction.x - 1 end
-        if state.keys_down.move_right then state.movement_direction.x = state.movement_direction.x + 1 end
-        if state.keys_down.move_up    then state.movement_direction.y = state.movement_direction.y - 1 end
-        if state.keys_down.move_down  then state.movement_direction.y = state.movement_direction.y + 1 end
-        state.movement_multiplier = state.keys_down.focus and 0.3 or 1.0
-        state.movement_vector = vector.normalize(state.movement_direction) * state.movement_multiplier
-        if state.keys_down.quit       then love.event.quit() end
-
+        if state.mouse_controls then
+            state.movement_vector.x = state.mouse.dx
+            state.movement_vector.y = state.mouse.dy
+            state.mouse.dx, state.mouse.dy = 0, 0
+        else
+            if state.keys_down.move_left  then state.movement_direction.x = state.movement_direction.x - 1 end
+            if state.keys_down.move_right then state.movement_direction.x = state.movement_direction.x + 1 end
+            if state.keys_down.move_up    then state.movement_direction.y = state.movement_direction.y - 1 end
+            if state.keys_down.move_down  then state.movement_direction.y = state.movement_direction.y + 1 end
+            state.movement_multiplier = state.keys_down.focus and 0.3 or 1.0
+            state.movement_vector = vector.normalize(state.movement_direction) * state.movement_multiplier
+        end
+        if state.keys_down.quit then love.event.quit() end
     end,
-        
 }

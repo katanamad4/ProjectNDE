@@ -17,8 +17,11 @@ state.time = 0
 state.window_dimensions = vector.new(1366, 768)
 state.pf_dimensions = vector.new(math.floor(1366 / 3), 768 - 20)
 state.pf_pos = vector.new(math.floor(1366 / 3), 10)
-
-
+state.mouse_controls = false
+state.mouse = {
+    dx = 0,
+    dy = 0,
+}
 state.key_map = {
     left   = "move_left",
     right  = "move_right",
@@ -27,6 +30,7 @@ state.key_map = {
     lshift = "focus",
     escape = "quit",
     f3     = "debug",
+    m      = "mouse"
 }
 state.keys_down = {}
 state.sprites = {

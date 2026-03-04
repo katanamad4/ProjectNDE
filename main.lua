@@ -18,7 +18,7 @@ function love.load(args)
         data.image =  love.graphics.newImage(data.path)
     end
     state.current_level = level.load("level1")
-
+    love.mouse.setRelativeMode(true)
 
 end
 
@@ -35,6 +35,10 @@ love.keyreleased = function(released_key)
   input.release(released_key)
 end
 
+love.mousemoved = function(x, y, dx, dy)
+    state.mouse.dx = dx
+    state.mouse.dy = dy
+end
 
 love.draw = function()
     state.current_level:draw()
