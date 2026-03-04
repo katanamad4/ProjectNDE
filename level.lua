@@ -14,6 +14,7 @@ level.load = function(name)
 end
 
 
+
 function level:update(dt)
     for _, entity in ipairs(self.entities) do
         if entity.update then
@@ -22,7 +23,7 @@ function level:update(dt)
     end
     
     -- collision pass
-    for _, ent in ipairs(self.entities) do
+    for key, ent in ipairs(self.entities) do
         if ent.type == "player" then
             for _, other in ipairs(self.entities) do
                 if other.type == "bullet"
@@ -34,6 +35,14 @@ function level:update(dt)
             end
         end
     end
+    for i = #self.entities, 1, -1 do
+        local ent = self.entities[i]
+        if ent.dead then
+            table.remove(self.entities, i)    
+        end
+    end
+
+
     state.time = state.time + 1
     state.player = state.current_level.entities.player
 end

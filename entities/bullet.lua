@@ -12,6 +12,8 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
     entity.sprite_key = sprite_key
     entity.color = state.palette[color] or state.palette.white
     entity.scale = 0.06
+    entity.dead = false
+    
 
     entity.draw = function(self)
         local sprite = state.sprites[self.sprite_key]
@@ -36,6 +38,9 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
     end
 
     entity.update = function(self)
+        if not vector.pos_in_pf(self.pos) then
+            self.dead = true
+        end 
         self.pos = self.pos + self.velocity
         self.velocity = self.velocity + self.acceleration
     end
