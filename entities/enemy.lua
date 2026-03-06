@@ -11,7 +11,8 @@ return function(pos, enemy_type, sprite_key)
     entity.pos = pos
     entity.enemy_type = enemy_type
     entity.scale = 0.8
-    
+    entity.sprite_key = sprite_key
+
     entity.draw = function(self)
         local sprite = state.sprites[self.sprite_key]
 
@@ -19,8 +20,17 @@ return function(pos, enemy_type, sprite_key)
         if not sprite or not sprite.image then return end
 
         if sprite and sprite.image then
-            love.graphics.setColor(self.color)
-            love.graphics.draw(sprite.image, self.pos.x, self.pos.y, self.scale, self.scale, sprite.offset.x , sprite.offset.y)
+            love.graphics.setColor(state.palette.white)
+            love.graphics.draw(
+            sprite.image,
+            self.pos.x,
+            self.pos.y,
+            0,                 
+            self.scale,
+            self.scale,
+            sprite.offset.x,
+            sprite.offset.y
+            )
         end
     end
 

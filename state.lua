@@ -17,11 +17,8 @@ state.time = 0
 state.window_dimensions = vector.new(1366, 768)
 state.pf_dimensions = vector.new(math.floor(1366 / 3), 768 - 20)
 state.pf_pos = vector.new(math.floor(1366 / 3), 10)
-state.mouse_controls = false
-state.mouse = {
-    dx = 0,
-    dy = 0,
-}
+state.mouse_controls = true
+state.mouse_delta = vector.new()
 state.key_map = {
     left   = "move_left",
     right  = "move_right",

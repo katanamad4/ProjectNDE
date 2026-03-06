@@ -44,8 +44,11 @@ return function(pos, sprite_key)
     end
 
     entity.update = function(self)
-        self.velocity = vector.limit(state.movement_vector , self.maxspeed)
-        
+        if self.mouse_controls then 
+            self.velocity = vector.limit(state.movement_vector , self.maxspeed)
+        else
+            self.velocity = vector.limit(state.movement_vector * self.maxspeed, self.maxspeed)
+        end
         if self.velocity.x + self.pos.x < state.pf_pos.x then 
             self.velocity.x = 0 
         end
