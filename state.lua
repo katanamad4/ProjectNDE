@@ -10,6 +10,7 @@ state.movement_vector = vector.new()
 state.movement_direction = vector.new()
 state.movement_multiplier = 1.0
 state.paused = false
+state.player = { pos = {}}
 state.debug = true
 state.current_level = nil
 state.time = 0

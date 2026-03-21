@@ -34,14 +34,20 @@ return function(pos, enemy_type, sprite_key)
         end
     end
 
-    entity.update = function()
-         if enemy_type == "test" then
+    entity.update = function(self)
+        if enemy_type == "test" then
             if state.time % 3  == 0 then
                 for i = 1, 10, 1 do
-                    table.insert(state.current_level.entities, bullet(vector.new(682, 200), vector.from_angle(math.rad(i * 2 * state.time + i / 360), 3), vector.new(0,0), 3, "energyball", "orange"))
+                    table.insert(state.current_level.entities, bullet(vector.new(self.pos.x, self.pos.y), vector.from_angle(math.rad(i * 2 * state.time + i / 360), 3), vector.new(0,0), 3, "energyball", "orange"))
                 end
             end
-        end 
+        end
+        -- elseif enemy_type == "aiming" then
+        --     if state.time % 20 == 0 then
+        --         for i = 1, 5, 1 do
+        --             table.insert( state.current_level.entities, bullet(self.pos, vector.limit(state.player.pos, 3), vector.new(), 3, "energyball", "blue" ))
+        --         end
+        --     end
     end
 
     return entity

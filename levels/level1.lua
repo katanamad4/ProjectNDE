@@ -15,7 +15,9 @@ function level.load()
     entities.player = player_entity      -- named reference
     table.insert(entities, player_entity) -- numeric list entry
     -- table.insert(entities, bullet(vector.new(100, 100), vector.new(0, 0), vector.new(), 3, "grayball", "orange"))
-    table.insert(entities, enemy(vector.new(682, 200), "test", "jerky"))
+    table.insert(entities, enemy(vector.new(682, 100), "test", "jerky"))
+    -- table.insert(entities, enemy(vector.new(682, 300), "aiming", "jerky"))
+
 
     
 
