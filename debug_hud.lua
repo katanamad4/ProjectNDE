@@ -38,8 +38,6 @@ function debug.draw()
         entry(debug, n * debug.line_spacing + 5)
     end
 
-    
-
 end
 
 return debug
