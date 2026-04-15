@@ -9,10 +9,11 @@ return function(pos, sprite_key)
     entity.pos = pos
     entity.velocity = vector.new()
     entity.radius = 2.0
-    entity.maxspeed = 7.0
+    entity.maxspeed = 6.0
     entity.sprite_key = sprite_key
     entity.scale = 0.8
     entity.invincible = 0
+    entity.visible = true
 
 
 
@@ -29,18 +30,22 @@ return function(pos, sprite_key)
         local ox = image:getWidth() / 2
         local oy = image:getHeight() / 2
 
-        if self.invincible > 0 then 
-            love.graphics.setColor(state.palette.red)
-        else
-            love.graphics.setColor(state.palette.white)
+        if self.invincible > 0 and state.time % 4 == 0 then 
+            self.visible = not self.visible
         end
-        love.graphics.draw(image, self.pos.x, self.pos.y, 0, self.scale, self.scale, ox, oy)
-        if state.keys_down.focus then 
-            love.graphics.setColor(state.palette.red)
-            love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 2)
-            love.graphics.setColor(state.palette.white)
-            love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 1)
+        if self.visible then
+            love.graphics.draw(image, self.pos.x, self.pos.y, 0, self.scale, self.scale, ox, oy)
+            if state.keys_down.focus then 
+                love.graphics.setColor(state.palette.red)
+                love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 2)
+                love.graphics.setColor(state.palette.white)
+                love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 1)
+            end
         end
+        if self.invincible == 0 then
+            self.visible = true
+        end
+        
     end
 
     entity.update = function(self)

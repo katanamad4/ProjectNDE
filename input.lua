@@ -46,7 +46,7 @@ return {
             if state.keys_down.move_down  then state.movement_direction.y = state.movement_direction.y + 1 end
             state.movement_vector = vector.normalize(state.movement_direction) * state.movement_multiplier
         end
-        if state.keys_down.focus then state.movement_vector = state.movement_vector:limit(0.5) end
+        if state.keys_down.focus then state.movement_vector = state.movement_vector * state.focus_movement_multiplier  end
         if state.keys_down.quit then love.event.quit() end
     end,
 }

@@ -17,15 +17,8 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
 
     entity.draw = function(self)
         local sprite = state.sprites[self.sprite_key]
-
-        if state.debug then
-            love.graphics.setColor(state.palette.blue)
-            love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
-        end
-
         if not sprite or not sprite.image then return end
-
-        if sprite and sprite.image then
+        if sprite and sprite.image and not state.debug then
             love.graphics.setColor(self.color)
             love.graphics.draw(sprite.image,
             self.pos.x, self.pos.y,
@@ -34,7 +27,11 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
             self.radius * self.scale,
             sprite.offset.x , sprite.offset.y)
         end
-        
+
+        if state.debug then
+            love.graphics.setColor(state.palette.blue)
+            love.graphics.circle("line", self.pos.x, self.pos.y, self.radius)
+        end
     end
 
     entity.update = function(self)
