@@ -9,14 +9,18 @@ state.lives = 5
 state.movement_vector = vector.new()
 state.movement_direction = vector.new()
 state.movement_multiplier = 1.0
+state.focus_movement_multiplier = 0.3
 state.paused = false
+state.player = { pos = {}}
 state.debug = true
+state.current_level = nil
+state.time = 0
 
 state.window_dimensions = vector.new(1366, 768)
-state.pf_dimensions = vector.new(math.floor(1366 / 3), 768 - 20)
+state.pf_dimensions = vector.new(math.floor(1366 * 0.35), 768 - 20)
 state.pf_pos = vector.new(math.floor(1366 / 3), 10)
-
-
+state.mouse_controls = false
+state.mouse_delta = vector.new()
 state.key_map = {
     left   = "move_left",
     right  = "move_right",
@@ -25,10 +29,27 @@ state.key_map = {
     lshift = "focus",
     escape = "quit",
     f3     = "debug",
+    m      = "mouse"
 }
 state.keys_down = {}
 state.sprites = {
-    goob = "assets/goob.png"
+    goob = {
+        path = "assets/goob.png",
+        offset = vector.new(0, 0),
+        
+    },
+    grayball = {
+        path = "assets/grayball.png",
+        offset = vector.new(32, 32),
+    },
+    energyball = {
+        path = "assets/energyball.png",
+        offset = vector.new(96, 32),
+    },
+    jerky = {
+        path = "assets/jerky.png",
+        offset = vector.new(64,64),
+    }
 }
 state.palette = {
     -- Neutrals
@@ -41,7 +62,7 @@ state.palette = {
     -- Primary
     red     = {1.0, 0.0, 0.0, 1.0},
     green   = {0.0, 1.0, 0.0, 1.0},
-    blue    = {0.4, 0.4, 1.0, 1.0}, -- keeping your softer blue
+    blue    = {0.4, 0.4, 1.0, 1.0},
 
     -- Secondary
     yellow  = {0.9, 1.0, 0.2, 1.0},

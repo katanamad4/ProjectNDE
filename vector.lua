@@ -11,6 +11,8 @@ end
 function vector.__add(a, b)
     if type(b) == "number" then
         return vector.new(a.x + b, a.y + b)
+    elseif type(a) == "number" then
+        return vector.new(a + b.x, a + b.y)
     else
         return vector.new(a.x + b.x, a.y + b.y)
     end
@@ -94,6 +96,19 @@ function vector.from_angle(angle, length)
         math.cos(angle) * length,
         math.sin(angle) * length
     )
+end
+
+function vector.pos_in_pf(pos)
+        
+    if pos.x < state.pf_pos.x or
+    pos.x > state.pf_pos.x + state.pf_dimensions.x or
+    pos.y < state.pf_pos.y or 
+    pos.y > state.pf_pos.y + state.pf_dimensions.y then
+        return false
+    else
+        return true
+    end 
+   
 end
 
 return vector
