@@ -19,7 +19,7 @@ function love.load(args)
     end
     state.current_level = level.load("level1")
     love.mouse.setRelativeMode(true)
-
+    state.rng = love.math.newRandomGenerator( 1337148867695242 )
 end
 
 
