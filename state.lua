@@ -12,7 +12,7 @@ state.movement_multiplier = 1.0
 state.focus_movement_multiplier = 0.3
 state.paused = false
 state.player = { pos = {}}
-state.debug = true
+state.debug = false
 state.current_level = nil
 state.time = 0
 
@@ -29,31 +29,42 @@ state.key_map = {
     lshift = "focus",
     escape = "quit",
     f3     = "debug",
-    m      = "mouse,
-    x      = "shoot",
+    m      = "mouse",
+    z      = "shoot",
 }
-state.keys_down = {}
+state.keys_down = {
+    move_left = false,
+    move_right = false,
+    move_up = false,
+    move_down = false,
+    focus = false,
+    shooting = false,
+}
 state.sprites = {
     goob = {
         path = "assets/goob.png",
-        offset = vector.new(0, 0),
-        
+        offset = vector.new(40, 40),
+        scale = 0.7
     },
     grayball = {
         path = "assets/grayball.png",
         offset = vector.new(32, 32),
+        scale = 0.06
     },
     energyball = {
         path = "assets/energyball.png",
         offset = vector.new(96, 32),
+        scale = 0.06
     },
     jerky = {
         path = "assets/jerky.png",
         offset = vector.new(64, 64),
+        scale = 0.8,
     },
     knife = {
         path = "assets/knife.png",
         offset = vector.new(32, 32),
+        scale = 0.3
     },
 }
 state.palette = {

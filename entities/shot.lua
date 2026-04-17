@@ -11,21 +11,24 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
     entity.radius = radius
     entity.sprite_key = sprite_key
     entity.color = state.palette[color] or state.palette.white
-    entity.scale = 0.06
     entity.dead = false
-    
+    entity.sprite = state.sprites[entity.sprite_key]
+
 
      entity.draw = function(self)
-        local sprite = state.sprites[self.sprite_key]
-        if not sprite or not sprite.image then return end
-        if sprite and sprite.image and not state.debug then
+        love.graphics.setColor(state.palette.red)
+        if not self.sprite or not self.sprite.image then love.graphics.print("NO SPRITE", 10, 200) end
+
+        if self.sprite and self.sprite.image and not state.debug then
             love.graphics.setColor(self.color)
-            love.graphics.draw(sprite.image,
-            self.pos.x, self.pos.y,
-            vector.angle(self.velocity),
-            self.radius * self.scale,
-            self.radius * self.scale,
-            sprite.offset.x , sprite.offset.y)
+            love.graphics.draw(
+                self.sprite.image,
+                self.pos.x, self.pos.y,
+                vector.angle(self.velocity),
+                self.radius * self.sprite.scale,
+                self.radius * self.sprite.scale,
+                self.sprite.offset.x , self.sprite.offset.y
+            )
         end
 
         if state.debug then
