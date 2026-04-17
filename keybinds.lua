@@ -65,4 +65,13 @@ keybinds.mouse = {
     end
 }
 
+keybinds.shoot = {
+    press = function()
+        state.keys_down.shooting = true
+    end,
+    release = function()
+        state.keys_down.shooting = false
+    end
+}
+
 return keybinds

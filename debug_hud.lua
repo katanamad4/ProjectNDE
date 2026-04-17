@@ -24,6 +24,11 @@ debug.entries = {
     pos = function(self, y)
         love.graphics.print("player.pos x: " .. state.player.pos.x .. " y: " .. state.player.pos.y , 10, y)
     end,
+    shooting = function(self, y)
+        if state.keys_down.shooting then
+            love.graphics.print("Shooting", 10, y)
+        end
+    end,
     
 }
 

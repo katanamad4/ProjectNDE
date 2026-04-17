@@ -21,7 +21,7 @@ function level:update(dt)
             entity:update()
         end
     end
-    
+    --TODO: add shot colision w/ enemies 
     -- collision pass
     for key, ent in ipairs(self.entities) do
         if ent.type == "player" then

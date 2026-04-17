@@ -1,10 +1,10 @@
-state = require("state")
-vector = require("vector")
+local vector = require("vector")
+local state = require("state")
 
 return function(pos, velocity, acceleration, radius, sprite_key, color)
     local entity = {}
     entity.__index = entity
-    entity.type = "bullet"
+    entity.type = "shot"
     entity.pos = pos
     entity.velocity = velocity
     entity.acceleration = acceleration
@@ -15,20 +15,24 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
     entity.sprite = state.sprites[entity.sprite_key]
 
 
-    entity.draw = function(self)
-        if not self.sprite or not self.sprite.image then return end
+     entity.draw = function(self)
+        love.graphics.setColor(state.palette.red)
+        if not self.sprite or not self.sprite.image then love.graphics.print("NO SPRITE", 10, 200) end
+
         if self.sprite and self.sprite.image and not state.debug then
             love.graphics.setColor(self.color)
-            love.graphics.draw(self.sprite.image,
-            self.pos.x, self.pos.y,
-            vector.angle(self.velocity),
-            self.radius * self.sprite.scale,
-            self.radius * self.sprite.scale,
-            self.sprite.offset.x , self.sprite.offset.y)
+            love.graphics.draw(
+                self.sprite.image,
+                self.pos.x, self.pos.y,
+                vector.angle(self.velocity),
+                self.radius * self.sprite.scale,
+                self.radius * self.sprite.scale,
+                self.sprite.offset.x , self.sprite.offset.y
+            )
         end
 
         if state.debug then
-            love.graphics.setColor(state.palette.red)
+            love.graphics.setColor(state.palette.blue)
             love.graphics.circle("line", self.pos.x, self.pos.y, self.radius)
         end
     end

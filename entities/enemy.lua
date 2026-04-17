@@ -10,41 +10,61 @@ return function(pos, enemy_type, sprite_key)
     entity.type = "enemy"
     entity.pos = pos
     entity.enemy_type = enemy_type
-    entity.scale = 0.8
+    entity.health = 1000
+    entity.radius = 10
     entity.sprite_key = sprite_key
+    entity.sprite = state.sprites[entity.sprite_key]
 
     entity.draw = function(self)
-        local sprite = state.sprites[self.sprite_key]
+        if not self.sprite or not self.sprite.image then love.graphics.print("NO SPRITE", 10, 200) end
 
-
-        if not sprite or not sprite.image then return end
-
-        if sprite and sprite.image then
+        if self.sprite and self.sprite.image then
             love.graphics.setColor(state.palette.white)
             love.graphics.draw(
-            sprite.image,
+            self.sprite.image,
             self.pos.x,
             self.pos.y,
             0,                 
-            self.scale,
-            self.scale,
-            sprite.offset.x,
-            sprite.offset.y
+            self.sprite.scale,
+            self.sprite.scale,
+            self.sprite.offset.x,
+            self.sprite.offset.y
             )
         end
     end
-
+--TODO: add enemy movement 
     entity.update = function(self)
         if enemy_type == "test" then
             if state.time % 2  == 0 then
                 for i = 1, 10, 1 do
-                    table.insert(state.current_level.entities, bullet(self.pos, vector.from_angle(math.rad((i * 2 * state.time + i*0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5), vector.new(0,0), 3, "energyball", "orange"))
+                    table.insert(
+                        state.current_level.entities, 
+                        bullet(
+                            self.pos, 
+                            vector.from_angle(math.rad((i * 2 * state.time + i*0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5),
+                            vector.new(0,0),
+                            3, 
+                            "energyball", 
+                            "orange"
+                        )
+                    )
                 end
             end
+
         elseif enemy_type == "aiming" then
-            if state.time % 2 == 0 then
+            if state.time % 4 == 0 then
                 for i = -2, 2, 1 do
-                    table.insert( state.current_level.entities, bullet(self.pos, vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 2)) * 6, vector.new(), 3, "energyball", "blue" ))
+                    table.insert(
+                        state.current_level.entities,
+                        bullet(
+                            self.pos,
+                            vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 5)) * 6,
+                            vector.new(),
+                            3,
+                            "grayball",
+                            "yellow"
+                        )
+                    )
                 end
             end
         end
