@@ -29,7 +29,8 @@ state.key_map = {
     lshift = "focus",
     escape = "quit",
     f3     = "debug",
-    m      = "mouse"
+    m      = "mouse,
+    x      = "shoot",
 }
 state.keys_down = {}
 state.sprites = {
@@ -48,8 +49,12 @@ state.sprites = {
     },
     jerky = {
         path = "assets/jerky.png",
-        offset = vector.new(64,64),
-    }
+        offset = vector.new(64, 64),
+    },
+    knife = {
+        path = "assets/knife.png",
+        offset = vector.new(32, 32),
+    },
 }
 state.palette = {
     -- Neutrals

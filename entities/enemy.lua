@@ -11,6 +11,8 @@ return function(pos, enemy_type, sprite_key)
     entity.pos = pos
     entity.enemy_type = enemy_type
     entity.scale = 0.8
+    entity.health = 1000
+    entity.radius = 10
     entity.sprite_key = sprite_key
 
     entity.draw = function(self)
@@ -38,13 +40,34 @@ return function(pos, enemy_type, sprite_key)
         if enemy_type == "test" then
             if state.time % 2  == 0 then
                 for i = 1, 10, 1 do
-                    table.insert(state.current_level.entities, bullet(self.pos, vector.from_angle(math.rad((i * 2 * state.time + i*0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5), vector.new(0,0), 3, "energyball", "orange"))
+                    table.insert(
+                        state.current_level.entities, 
+                        bullet(
+                            self.pos, 
+                            vector.from_angle(math.rad((i * 2 * state.time + i*0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5),
+                            vector.new(0,0),
+                            3, 
+                            "energyball", 
+                            "orange"
+                        )
+                    )
                 end
             end
+
         elseif enemy_type == "aiming" then
             if state.time % 2 == 0 then
                 for i = -2, 2, 1 do
-                    table.insert( state.current_level.entities, bullet(self.pos, vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 2)) * 6, vector.new(), 3, "energyball", "blue" ))
+                    table.insert(
+                        state.current_level.entities,
+                        bullet(
+                            self.pos,
+                            vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 2)) * 6,
+                            vector.new(),
+                            3,
+                            "energyball",
+                            "blue"
+                        )
+                    )
                 end
             end
         end
