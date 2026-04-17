@@ -35,7 +35,7 @@ return function(pos, enemy_type, sprite_key)
             )
         end
     end
-
+--TODO: add enemy movement 
     entity.update = function(self)
         if enemy_type == "test" then
             if state.time % 2  == 0 then

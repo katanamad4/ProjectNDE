@@ -47,7 +47,7 @@ return function(pos, sprite_key)
         end
         
     end
-
+--TODO: add shooting
     entity.update = function(self)
         if self.mouse_controls then 
             self.velocity = vector.limit(state.movement_vector , self.maxspeed)
