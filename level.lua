@@ -21,8 +21,7 @@ function level:update(dt)
             entity:update()
         end
     end
-    --TODO: add shot colision w/ enemies 
-    -- collision pass
+
     for key, ent in ipairs(self.entities) do
         if ent.type == "player" then
             for _, other in ipairs(self.entities) do
@@ -31,6 +30,17 @@ function level:update(dt)
                 and ent.invincible <= 0
                 then
                     ent:hit()
+                end
+            end
+        end
+        if ent.type == "enemy" then
+            for _, other in ipairs(self.entities) do
+                if other.type == "shot"
+                and colision.circle_circle(ent, other)
+                and ent.invincible <= 0
+                then
+                    ent:hit(other.damage)
+                    other.dead =  true
                 end
             end
         end

@@ -13,7 +13,7 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
     entity.color = state.palette[color] or state.palette.white
     entity.dead = false
     entity.sprite = state.sprites[entity.sprite_key]
-
+    entity.damage = 1
 
      entity.draw = function(self)
         love.graphics.setColor(state.palette.red)

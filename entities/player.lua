@@ -83,7 +83,7 @@ return function(pos, sprite_key)
                     vector.new(),
                     3,
                     "knife",
-                    "blue"
+                    "white"
                 )
             )
         end 
