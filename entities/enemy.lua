@@ -64,6 +64,21 @@ return function(pos, enemy_type, sprite_key)
                     )
                 end
             end
+            -- if state.time % 4 == 0 then
+            --     for i = -2, 2, 1 do
+            --         table.insert(
+            --             state.current_level.entities,
+            --             bullet(
+            --                 self.pos,
+            --                 vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 5)) * 6,
+            --                 vector.new(),
+            --                 3,
+            --                 "grayball",
+            --                 "yellow"
+            --             )
+            --         )
+            --     end
+            -- end
 
         elseif enemy_type == "aiming" then
             if state.time % 4 == 0 then
