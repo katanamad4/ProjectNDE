@@ -75,17 +75,21 @@ return function(pos, sprite_key)
             self.velocity.y = 0 
         end
         if state.keys_down.shooting then
-            table.insert(
-                state.current_level.entities,
-                shot(
-                    self.pos,
-                    vector.new(0, -30),
-                    vector.new(),
-                    3,
-                    "knife",
-                    "white"
-                )
-            )
+            if state.time % 2 == 0 then
+                for i = -2, 2, 1 do
+                    table.insert(
+                        state.current_level.entities,
+                        shot(
+                            self.pos,
+                            vector.from_angle(math.rad(270 + i * 5) ) * 6,
+                            vector.new(),
+                            3,
+                            "knife",
+                            "transparent"
+                        )
+                    )
+                end
+            end
         end 
         self.pos = self.velocity + self.pos
         if self.invincible > 0 then

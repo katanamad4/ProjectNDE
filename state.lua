@@ -64,7 +64,7 @@ state.sprites = {
     knife = {
         path = "assets/knife.png",
         offset = vector.new(32, 32),
-        scale = 0.3
+        scale = 0.28
     },
 }
 state.palette = {
@@ -92,7 +92,7 @@ state.palette = {
     brown   = {0.4, 0.2, 0.1, 1.0},
 
     -- Transparent helpers
-    transparent = {1.0, 1.0, 1.0, 0.0},
+    transparent = {1.0, 1.0, 1.0, 0.2},
 }
 
 return state
