@@ -2,9 +2,6 @@ vector = require("vector")
 
 local state = {}
 
-
-
-
 state.lives = 5
 state.movement_vector = vector.new()
 state.movement_direction = vector.new()
