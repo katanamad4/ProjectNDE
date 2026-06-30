@@ -78,10 +78,10 @@ return function(pos, sprite_key)
             if state.time % 2 == 0 then
                 for i = -2, 2, 1 do
                     table.insert(
-                        state.current_level.entities,
+                        state.current_level.entities.shots,
                         shot(
                             self.pos,
-                            vector.from_angle(math.rad(270 + i * 5) ) * 6,
+                            vector.from_angle(math.rad(270 + i * 5) ) * 10,
                             vector.new(),
                             3,
                             "knife",

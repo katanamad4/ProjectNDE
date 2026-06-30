@@ -52,7 +52,7 @@ return function(pos, enemy_type, sprite_key)
             if state.time % 2  == 0 then
                 for i = 1, 10, 1 do
                     table.insert(
-                        state.current_level.entities, 
+                        state.current_level.entities.bullets, 
                         bullet(
                             self.pos, 
                             vector.from_angle(math.rad((i * 2 * state.time + i * 0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5),
@@ -84,7 +84,7 @@ return function(pos, enemy_type, sprite_key)
             if state.time % 4 == 0 then
                 for i = -2, 2, 1 do
                     table.insert(
-                        state.current_level.entities,
+                        state.current_level.entities.bullets,
                         bullet(
                             self.pos,
                             vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 5)) * 6,

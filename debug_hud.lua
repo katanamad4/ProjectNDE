@@ -10,7 +10,11 @@ debug.entries = {
             love.graphics.print("FPS: " .. love.timer.getFPS(), 10, y)
     end,
     entities = function(self, y)
-        love.graphics.print("Entities: " .. #state.current_level.entities, 10, y)
+        local entityAmount = 0
+        for groupName, group in pairs(state.current_level.entities) do
+            entityAmount = entityAmount + #group
+        end
+        love.graphics.print("Entities: " .. entityAmount, 10, y)
     end,
     movement_v = function(self, y)
         if state.movement_vector then
