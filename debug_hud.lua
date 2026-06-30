@@ -13,8 +13,10 @@ debug.entries = {
         local entityAmount = 0
         for groupName, group in pairs(state.current_level.entities) do
             entityAmount = entityAmount + #group
+            -- use the group.layer var that i didnt add at the moment to manage the y position
         end
-        love.graphics.print("Entities: " .. entityAmount, 10, y)
+        love.graphics.print("all Entities: " .. entityAmount, 10, y + #state.current_level.entities)
+
     end,
     movement_v = function(self, y)
         if state.movement_vector then
@@ -46,7 +48,8 @@ function debug.draw()
         n = n + 1
         entry(debug, n * debug.line_spacing + 5)
     end
-
+    --debug should use deep too
+    
 end
 
 return debug

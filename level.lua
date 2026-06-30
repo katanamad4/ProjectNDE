@@ -1,4 +1,5 @@
 local colision = require("colision")
+local deep = require "deep"
 
 local level = {}
 
@@ -8,7 +9,7 @@ level.load = function(name)
     local level_module = require("levels/" .. name)
 
     local self = setmetatable({}, level)
-    self.entities = level_module.load()
+    self.entities, self.layers = level_module.load()
 
     return self
 end
@@ -17,13 +18,12 @@ end
 
 function level:update(dt)
     for groupName, group in pairs(self.entities) do
-        print(groupName, "table update")
         for key, ent in ipairs(group) do
             if ent.update then
                 if ent.dead then
                     table.remove(group, key)    
                 end
-                ent:update()
+                ent:update(dt)
             end
         end
     end 
@@ -33,44 +33,33 @@ function level:update(dt)
             state.player:hit()
             bullet.dead = true
         end
-        --add colision for shots
     end
-
-    -- for key, ent in ipairs(self.entities) do
-    --     if ent.type == "player" then
-    --         for _, other in ipairs(self.entities) do
-    --             if other.type == "bullet"
-    --             and colision.circle_circle(ent, other)
-    --             and ent.invincible <= 0
-    --             then
-    --                 ent:hit()
-    --             end
-    --         end
-    --     end
-    --     if ent.type == "enemy" then
-    --         for _, other in ipairs(self.entities) do
-    --             if other.type == "shot"
-    --             and colision.circle_circle(ent, other)
-    --             and ent.invincible <= 0
-    --             then
-    --                 ent:hit(other.damage)
-    --                 other.dead =  true
-    --             end
-    --         end
-    --     end
-    -- end
-
+    for e_key, enemy in ipairs(self.entities.enemies) do 
+        for s_key, shot in ipairs(self.entities.shots) do
+            if colision.circle_circle(enemy, shot) and enemy.invincible <= 0 then
+                enemy:hit(shot.damage)
+            end
+        end
+    end
 
     state.time = state.time + 1
     state.player = state.current_level.entities.player[1]
 end
 
 function level:draw()
-    for _, entity in ipairs(self.entities) do
-        if entity.draw then
-            entity:draw()
+    for groupName, group in pairs(self.entities) do
+        for key, ent in ipairs(group) do
+           self.layers[groupName]:queue(key, ent:draw())
         end
-    end
+    end 
+   self.layers.player:draw()
+   self.layers.shots:draw()
+   self.layers.bullets:draw()
+   self.layers.enemies:draw()
+   self.layers.hud:draw()
+   self.layers.debug:draw()
+   
+
 end
 
 return level
