@@ -38,6 +38,7 @@ function level:update(dt)
         for s_key, shot in ipairs(self.entities.shots) do
             if colision.circle_circle(enemy, shot) and enemy.invincible <= 0 then
                 enemy:hit(shot.damage)
+                shot.dead = true
             end
         end
     end
@@ -51,13 +52,13 @@ function level:draw()
         for key, ent in ipairs(group) do
            self.layers[groupName]:queue(key, ent:draw())
         end
-    end 
-   self.layers.player:draw()
-   self.layers.shots:draw()
-   self.layers.bullets:draw()
-   self.layers.enemies:draw()
-   self.layers.hud:draw()
-   self.layers.debug:draw()
+    end  
+    self.layers.shots:draw()
+    self.layers.player:draw()
+    self.layers.bullets:draw()
+    self.layers.enemies:draw()
+    self.layers.hud:draw()
+    self.layers.debug:draw()
    
 
 end

@@ -81,7 +81,7 @@ return function(pos, sprite_key)
                         state.current_level.entities.shots,
                         shot(
                             self.pos,
-                            vector.from_angle(math.rad(270 + i * 5) ) * 10,
+                            vector.from_angle(math.rad(270 + i * 5) ) * 20,
                             vector.new(),
                             3,
                             "knife",

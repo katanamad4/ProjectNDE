@@ -6,7 +6,7 @@ state.lives = 5
 state.movement_vector = vector.new()
 state.movement_direction = vector.new()
 state.movement_multiplier = 1.0
-state.focus_movement_multiplier = 0.3
+state.focus_movement_multiplier = 0.6
 state.paused = false
 state.player = { pos = {}}
 state.debug = false
