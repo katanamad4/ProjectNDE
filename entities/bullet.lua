@@ -17,7 +17,7 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
 
     entity.draw = function(self)
         if not self.sprite or not self.sprite.image then return end
-        if self.sprite and self.sprite.image then
+        if self.sprite and self.sprite.image and not state.debug then
             love.graphics.setColor(self.color)
             love.graphics.draw(self.sprite.image,
             self.pos.x, self.pos.y,

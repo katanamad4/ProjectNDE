@@ -4,17 +4,18 @@ local bullet = require("entities/bullet")
 
 
 
-return function(pos, enemy_type, sprite_key)
+return function(start_pos, sprite_key, script)
     local entity = {}
     entity.__index = entity
     entity.type = "enemy"
-    entity.pos = pos
-    entity.enemy_type = enemy_type
+    entity.pos = start_pos
+    entity.script = script
     entity.health = 1000
     entity.radius = 40
     entity.sprite_key = sprite_key
     entity.sprite = state.sprites[entity.sprite_key]
     entity.invincible = 0
+    entity.age = 0
 
     entity.hit = function(self, damage)
         self.health = self.health - damage
@@ -48,23 +49,27 @@ return function(pos, enemy_type, sprite_key)
             self.dead = true
         end
 
-        if enemy_type == "test" then
-            if state.time % 2  == 0 then
-                for i = 1, 10, 1 do
-                    table.insert(
-                        state.current_level.entities.bullets, 
-                        bullet(
-                            self.pos, 
-                            vector.from_angle(math.rad((i * 2 * state.time + i * 0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5),
-                            vector.new(0,0),
-                            3, 
-                            "energyball", 
-                            "orange"
-                        )
-                    )
-                end
-            end
-            -- if state.time % 4 == 0 then
+        self.age = self.age + 1
+        self.script(self)
+
+
+        -- if enemy_type == "test" then
+        --     if state.time % 2  == 0 then
+        --         for i = 1, 10, 1 do
+        --             table.insert(
+        --                 state.current_level.entities.bullets, 
+        --                 bullet(
+        --                     self.pos, 
+        --                     vector.from_angle(math.rad((i * 2 * state.time + i * 0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5),
+        --                     vector.new(0,0),
+        --                     3, 
+        --                     "energyball", 
+        --                     "orange"
+        --                 )
+        --             )
+        --         end
+        --     end
+        --     -- if state.time % 4 == 0 then
             --     for i = -2, 2, 1 do
             --         table.insert(
             --             state.current_level.entities,
@@ -80,23 +85,23 @@ return function(pos, enemy_type, sprite_key)
             --     end
             -- end
 
-        elseif enemy_type == "aiming" then
-            if state.time % 4 == 0 then
-                for i = -2, 2, 1 do
-                    table.insert(
-                        state.current_level.entities.bullets,
-                        bullet(
-                            self.pos,
-                            vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 5)) * 6,
-                            vector.new(),
-                            3,
-                            "grayball",
-                            "yellow"
-                        )
-                    )
-                end
-            end
-        end
+        -- elseif enemy_type == "aiming" then
+        --     if state.time % 4 == 0 then
+        --         for i = -2, 2, 1 do
+        --             table.insert(
+        --                 state.current_level.entities.bullets,
+        --                 bullet(
+        --                     self.pos,
+        --                     vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 5)) * 6,
+        --                     vector.new(),
+        --                     3,
+        --                     "grayball",
+        --                     "yellow"
+        --                 )
+        --             )
+        --         end
+        --     end
+        -- end
     end
 
     return entity
