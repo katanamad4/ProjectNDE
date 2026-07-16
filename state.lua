@@ -12,7 +12,7 @@ state.player = { pos = {}}
 state.debug = false
 state.current_level = nil
 state.time = 0
-
+state.time_scale = 1
 state.window_dimensions = vector.new(1366, 768)
 state.pf_dimensions = vector.new(math.floor(1366 * 0.35), 768 - 20)
 state.pf_pos = vector.new(math.floor(1366 / 3), 10)

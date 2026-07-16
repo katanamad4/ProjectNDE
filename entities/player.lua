@@ -9,7 +9,7 @@ return function(pos, sprite_key)
     entity.type = "player"
     entity.pos = pos
     entity.velocity = vector.new()
-    entity.radius = 1.7
+    entity.radius = 1.2
     entity.maxspeed = 6.0
     entity.sprite_key = sprite_key
     entity.invincible = 0
@@ -44,11 +44,12 @@ return function(pos, sprite_key)
                 )
             end
         
-            if state.keys_down.focus then 
+            -- if state.keys_down.focus then 
+            if true then
                 love.graphics.setColor(state.palette.red)
-                love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 2)
+                love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 3)
                 love.graphics.setColor(state.palette.white)
-                love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 0.5)
+                love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 2)
             end
         end
         if self.invincible == 0 then

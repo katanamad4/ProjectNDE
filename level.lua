@@ -20,7 +20,7 @@ function level:update(dt)
     for groupName, group in pairs(self.entities) do
         for key, ent in ipairs(group) do
             if ent.update then
-                if ent.dead then
+                if ent.despawn then
                     table.remove(group, key)    
                 end
                 ent:update(dt)
@@ -43,7 +43,7 @@ function level:update(dt)
         end
     end
 
-    state.time = state.time + 1
+    state.time = state.time + state.time
     state.player = state.current_level.entities.player[1]
 end
 

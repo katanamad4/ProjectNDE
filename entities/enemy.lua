@@ -49,59 +49,8 @@ return function(start_pos, sprite_key, script)
             self.dead = true
         end
 
-        self.age = self.age + 1
+        self.age = self.age + state.time_scale
         self.script(self)
-
-
-        -- if enemy_type == "test" then
-        --     if state.time % 2  == 0 then
-        --         for i = 1, 10, 1 do
-        --             table.insert(
-        --                 state.current_level.entities.bullets, 
-        --                 bullet(
-        --                     self.pos, 
-        --                     vector.from_angle(math.rad((i * 2 * state.time + i * 0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5),
-        --                     vector.new(0,0),
-        --                     3, 
-        --                     "energyball", 
-        --                     "orange"
-        --                 )
-        --             )
-        --         end
-        --     end
-        --     -- if state.time % 4 == 0 then
-            --     for i = -2, 2, 1 do
-            --         table.insert(
-            --             state.current_level.entities,
-            --             bullet(
-            --                 self.pos,
-            --                 vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 5)) * 6,
-            --                 vector.new(),
-            --                 3,
-            --                 "grayball",
-            --                 "yellow"
-            --             )
-            --         )
-            --     end
-            -- end
-
-        -- elseif enemy_type == "aiming" then
-        --     if state.time % 4 == 0 then
-        --         for i = -2, 2, 1 do
-        --             table.insert(
-        --                 state.current_level.entities.bullets,
-        --                 bullet(
-        --                     self.pos,
-        --                     vector.from_angle(math.rad(math.deg(vector.angle((state.player.pos - self.pos):normalize())) + i * 5)) * 6,
-        --                     vector.new(),
-        --                     3,
-        --                     "grayball",
-        --                     "yellow"
-        --                 )
-        --             )
-        --         end
-        --     end
-        -- end
     end
 
     return entity

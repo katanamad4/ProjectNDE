@@ -1,7 +1,7 @@
 state = require("state")
 vector = require("vector")
 
-return function(pos, velocity, acceleration, radius, sprite_key, color)
+return function(pos, velocity, acceleration, radius, sprite_key, color, script)
     local entity = {}
     entity.__index = entity
     entity.type = "bullet"
@@ -11,8 +11,10 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
     entity.radius = radius
     entity.sprite_key = sprite_key
     entity.color = state.palette[color] or state.palette.white
+    entity.despawn = false
     entity.dead = false
     entity.sprite = state.sprites[entity.sprite_key]
+    entity.age = 0 
 
 
     entity.draw = function(self)
@@ -35,11 +37,16 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
 
     entity.update = function(self)
         if not vector.pos_in_pf(self.pos) then
-            self.dead = true
+            self.despawn = true
         end 
         self.pos = self.pos + self.velocity
         self.velocity = self.velocity + self.acceleration
+        self.age = self.age + state.time_scale  
+        if self.script then
+            self:script()
+        end
     end
 
+     
     return entity
 end

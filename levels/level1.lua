@@ -24,20 +24,17 @@ function level.load()
     end
 
     local enemy_script = {
-        test = function(self)
-            if state.time % 2  == 0 then
-                for i = 1, 10, 1 do
-                    table.insert(
-                        state.current_level.entities.bullets, 
-                        bullet(
-                            self.pos, 
-                            vector.from_angle(math.rad((i * 2 * state.time + i * 0.2 / 360 )*  love.math.random( -100, 100 ) / 100), 5),
-                            vector.new(0,0),
-                            3, 
-                            "energyball", 
-                            "orange"
-                        )
-                    )
+        tidal_sine = function(self)
+            if self.age % 2  == 0 then
+                for i = 1, 3, 1 do
+                    table.insert(entities.bullets, bullet(
+                        vector.new(self.pos.x + math.sin(self.age / i * 0.15) * 250, self.pos.y),
+                        vector.new(0, i + 2),
+                        vector.new(0, 0),
+                        3, 
+                        "energyball", 
+                        "orange"
+                    ))
                 end
             end
         end
@@ -46,7 +43,7 @@ function level.load()
 
     table.insert(entities.hud, playfield(state.pf_pos, state.pf_dimensions))
     entities.player[1] = player(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2, state.pf_pos.y + (state.pf_dimensions.y / 3 ) * 2), "goob")
-    table.insert(entities.enemies, enemy(vector.new(682, 300), "jerky", enemy_script.test))
+    table.insert(entities.enemies, enemy(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2 , 200), "jerky", enemy_script.tidal_sine))
 
     return entities, layers
 end
