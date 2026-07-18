@@ -35,6 +35,9 @@ debug.entries = {
             love.graphics.print("Shooting", 10, y)
         end
     end,
+    time = function(self, y)
+        love.graphics.print(state.time, 10, y)
+    end
     
 }
 

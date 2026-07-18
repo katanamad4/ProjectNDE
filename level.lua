@@ -43,7 +43,7 @@ function level:update(dt)
         end
     end
 
-    state.time = state.time + state.time
+    state.time = state.time + state.time_scale
     state.player = state.current_level.entities.player[1]
 end
 

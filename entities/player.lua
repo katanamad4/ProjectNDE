@@ -64,9 +64,9 @@ return function(pos, sprite_key)
 
     entity.update = function(self, dt)
         if self.mouse_controls then 
-            self.velocity = vector.limit(state.movement_vector , self.maxspeed)
+            self.velocity = vector.limit(state.movement_vector * state.time_scale, self.maxspeed * state.time_scale)
         else
-            self.velocity = vector.limit(state.movement_vector * self.maxspeed, self.maxspeed)
+            self.velocity = vector.limit(state.movement_vector * self.maxspeed * state.time_scale, self.maxspeed * state.time_scale)
         end
         if self.velocity.x + self.pos.x < state.pf_pos.x - state.pf_player_border_offset then 
             self.velocity.x = 0 

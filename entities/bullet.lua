@@ -39,7 +39,7 @@ return function(pos, velocity, acceleration, radius, sprite_key, color, script)
         if not vector.pos_in_pf(self.pos, 10) then
             self.despawn = true
         end 
-        self.pos = self.pos + self.velocity
+        self.pos = self.pos + self.velocity * state.time_scale
         self.velocity = self.velocity + self.acceleration
         self.age = self.age + state.time_scale  
         if self.script then
