@@ -50,7 +50,9 @@ return function(start_pos, sprite_key, script)
         end
 
         self.age = self.age + state.time_scale
-        self.script(self)
+        if self.script then 
+            self.script(self)
+        end    
     end
 
     return entity

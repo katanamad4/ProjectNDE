@@ -44,12 +44,17 @@ return function(pos, sprite_key)
                 )
             end
         
-            -- if state.keys_down.focus then 
-            if true then
+            if state.keys_down.focus then 
+            -- if true then
                 love.graphics.setColor(state.palette.red)
                 love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 3)
                 love.graphics.setColor(state.palette.white)
                 love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius + 2)
+                if state.debug then
+                    love.graphics.setColor(state.palette.blue)
+                    love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
+
+                end
             end
         end
         if self.invincible == 0 then
@@ -63,16 +68,16 @@ return function(pos, sprite_key)
         else
             self.velocity = vector.limit(state.movement_vector * self.maxspeed, self.maxspeed)
         end
-        if self.velocity.x + self.pos.x < state.pf_pos.x then 
+        if self.velocity.x + self.pos.x < state.pf_pos.x - state.pf_player_border_offset then 
             self.velocity.x = 0 
         end
-        if self.velocity.x + self.pos.x > state.pf_pos.x + state.pf_dimensions.x then 
+        if self.velocity.x + self.pos.x > state.pf_pos.x + state.pf_dimensions.x + state.pf_player_border_offset then 
             self.velocity.x = 0 
         end
-        if self.velocity.y + self.pos.y < state.pf_pos.y then 
+        if self.velocity.y + self.pos.y < state.pf_pos.y - state.pf_player_border_offset then 
             self.velocity.y = 0 
         end
-        if self.velocity.y + self.pos.y > state.pf_pos.y + state.pf_dimensions.y then 
+        if self.velocity.y + self.pos.y > state.pf_pos.y + state.pf_dimensions.y + state.pf_player_border_offset then 
             self.velocity.y = 0 
         end
         if state.keys_down.shooting then

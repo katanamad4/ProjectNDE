@@ -19,7 +19,7 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
         love.graphics.setColor(state.palette.red)
         if not self.sprite or not self.sprite.image then love.graphics.print("NO SPRITE", 10, 200) end
 
-        if self.sprite and self.sprite.image then
+        if self.sprite and self.sprite.image and not state.debug then
             love.graphics.setColor(self.color)
             love.graphics.draw(
                 self.sprite.image,
@@ -38,7 +38,7 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
     end
 
     entity.update = function(self)
-        if not vector.pos_in_pf(self.pos) then
+        if not vector.pos_in_pf(self.pos, 10) then
             self.dead = true
         end 
         self.pos = self.pos + self.velocity

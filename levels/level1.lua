@@ -28,7 +28,7 @@ function level.load()
             if self.age % 2  == 0 then
                 for i = 1, 3, 1 do
                     table.insert(entities.bullets, bullet(
-                        vector.new(self.pos.x + math.sin(self.age / i * 0.15) * 250, self.pos.y),
+                        vector.new(self.pos.x + math.sin(self.age / i * 0.15) * 350, self.pos.y),
                         vector.new(0, i + 2),
                         vector.new(0, 0),
                         3, 
@@ -37,13 +37,28 @@ function level.load()
                     ))
                 end
             end
-        end
+        end,
+        spread = function(self)
+            if self.age % 5  == 0 then
+                for i = 0, 150, 1 do
+                    table.insert(entities.bullets, bullet(
+                        vector.new(self.pos.x, self.pos.y),
+                        vector.from_angle(math.pi/64 * i * self.age % 6, 4 * (i % 2)),
+                        vector.from_angle(math.pi/64 * i, 0),
+                        -- vector.new(),
+                        3, 
+                        "energyball", 
+                        "orange"
+                    ))
+                end
+            end
+        end,
     }    
 
 
     table.insert(entities.hud, playfield(state.pf_pos, state.pf_dimensions))
     entities.player[1] = player(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2, state.pf_pos.y + (state.pf_dimensions.y / 3 ) * 2), "goob")
-    table.insert(entities.enemies, enemy(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2 , 200), "jerky", enemy_script.tidal_sine))
+    table.insert(entities.enemies, enemy(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2 , 200), "jerky", enemy_script.spread))
 
     return entities, layers
 end

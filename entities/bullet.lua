@@ -31,12 +31,12 @@ return function(pos, velocity, acceleration, radius, sprite_key, color, script)
 
         if state.debug then
             love.graphics.setColor(state.palette.red)
-            love.graphics.circle("line", self.pos.x, self.pos.y, self.radius)
+            love.graphics.circle("fill", self.pos.x, self.pos.y, self.radius)
         end
     end
 
     entity.update = function(self)
-        if not vector.pos_in_pf(self.pos) then
+        if not vector.pos_in_pf(self.pos, 10) then
             self.despawn = true
         end 
         self.pos = self.pos + self.velocity

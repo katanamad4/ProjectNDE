@@ -98,18 +98,19 @@ function vector.from_angle(angle, length)
     )
 end
 
-function vector.pos_in_pf(pos)
+function vector.pos_in_pf(pos, offset)
         
-    if pos.x < state.pf_pos.x or
-    pos.x > state.pf_pos.x + state.pf_dimensions.x or
-    pos.y < state.pf_pos.y or 
-    pos.y > state.pf_pos.y + state.pf_dimensions.y then
+    if pos.x < state.pf_pos.x - offset or
+    pos.x > state.pf_pos.x + state.pf_dimensions.x + offset or
+    pos.y < state.pf_pos.y - offset or 
+    pos.y > state.pf_pos.y + state.pf_dimensions.y + offset then
         return false
     else
         return true
     end 
-   
 end
+
+
 
 return vector
 

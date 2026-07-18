@@ -16,6 +16,7 @@ state.time_scale = 1
 state.window_dimensions = vector.new(1366, 768)
 state.pf_dimensions = vector.new(math.floor(1366 * 0.35), 768 - 20)
 state.pf_pos = vector.new(math.floor(1366 / 3), 10)
+state.pf_player_border_offset = -10
 state.mouse_controls = false
 state.mouse_delta = vector.new()
 state.key_map = {
