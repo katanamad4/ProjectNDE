@@ -29,6 +29,8 @@ state.key_map = {
     f3     = "debug",
     m      = "mouse",
     z      = "shoot",
+    kp2    = "time_plus",
+    kp1    = "time_minus",
 }
 state.keys_down = {
     move_left = false,

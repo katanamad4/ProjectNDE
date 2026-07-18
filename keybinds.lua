@@ -74,4 +74,16 @@ keybinds.shoot = {
     end
 }
 
+keybinds.time_plus = {
+    press = function()
+        state.time_scale = state.time_scale + 0.1
+    end
+}
+
+keybinds.time_minus = {
+    press = function()
+        state.time_scale = state.time_scale - 0.1
+    end
+}
+
 return keybinds

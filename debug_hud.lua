@@ -36,9 +36,11 @@ debug.entries = {
         end
     end,
     time = function(self, y)
-        love.graphics.print(state.time, 10, y)
+        love.graphics.print("time:" .. state.time, 10, y)
+    end,
+    time_scale = function(self, y)
+        love.graphics.print("time_scale:" .. state.time_scale, 10, y)
     end
-    
 }
 
 
