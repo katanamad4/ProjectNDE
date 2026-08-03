@@ -39,6 +39,9 @@ function level:update(dt)
                     table.remove(group, key)    
                 end
                 if ent.dead then
+                    if ent.death then 
+                        ent:death()
+                    end
                     table.remove(group, key)
                 end
                 ent:update(dt)

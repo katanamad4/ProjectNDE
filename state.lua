@@ -31,7 +31,6 @@ state.key_map = {
     z      = "shoot",
     kp2    = "time_plus",
     kp1    = "time_minus",
-    
 }
 state.keys_down = {
     move_left = false,

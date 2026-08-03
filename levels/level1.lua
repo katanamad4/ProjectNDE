@@ -30,7 +30,7 @@ function level.load(entities, layers)
                 for i = 0, 150, 1 do
                     table.insert(entities.bullets, bullet(
                         vector.new(self.pos.x, self.pos.y),
-                        vector.from_angle(math.pi/64 * i * math.floor(self.age) % 6, 1),
+                        vector.from_angle(math.pi/64 * i * math.floor(self.age) % 6, 4),
                         vector.from_angle(math.pi/64 * i, 0),
                         -- vector.new(),
                         3, 

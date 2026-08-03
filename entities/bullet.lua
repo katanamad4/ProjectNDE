@@ -47,6 +47,9 @@ return function(pos, velocity, acceleration, radius, sprite_key, color, script)
         end
     end
 
-     
+    entity.death = function(self)
+        print("bullet dead!")
+    end
+        
     return entity
 end

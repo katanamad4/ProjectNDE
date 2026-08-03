@@ -39,10 +39,14 @@ return function(pos, velocity, acceleration, radius, sprite_key, color)
 
     entity.update = function(self)
         if not vector.pos_in_pf(self.pos, 10) then
-            self.dead = true
+            self.despawn = true
         end 
         self.pos = self.pos + self.velocity
         self.velocity = self.velocity + self.acceleration
+    end
+
+    entity.death = function(self)
+        print "shot dead!"
     end
 
     return entity
