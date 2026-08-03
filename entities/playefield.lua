@@ -1,11 +1,11 @@
 local vector = require("vector")
 local state = require("state")
 
-return function(pos, dimensions)
+return function(data)
     entity = {}
-    entity.pos = pos
-    entity.dimensions = dimensions
-    entity.border = 5
+    entity.pos = data.pos
+    entity.dimensions = data.dimensions
+    entity.border = data.border or 10
 
     entity.draw = function(self)
         love.graphics.setColor(state.palette.white)

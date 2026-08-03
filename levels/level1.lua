@@ -43,7 +43,11 @@ function level.load(entities, layers)
     }    
 
 
-    table.insert(entities.hud, playfield(state.pf_pos, state.pf_dimensions))
+    table.insert(entities.hud, playfield({
+        pos = state.pf_pos,
+        dimensions = state.pf_dimensions,
+        border = 10
+    }))
     entities.player[1] = player(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2, state.pf_pos.y + (state.pf_dimensions.y / 3 ) * 2), "goob")
     table.insert(entities.enemies, enemy(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2 , 200), "jerky", enemy_script.spread))
 
