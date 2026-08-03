@@ -28,7 +28,7 @@ level.load = function(name)
     for groupName, group in pairs(self.entities) do
         self.pools[groupName] = {} 
         if groupName == "bullets" then
-            for i = 1, 100000, 1 do
+            for i = 1, 10000, 1 do
                 table.insert(self.pools[groupName], {})
             end
         elseif groupName == "shots" then
@@ -43,9 +43,13 @@ level.load = function(name)
             for i = 1, 10, 1 do
                 table.insert(self.pools[groupName], {})
             end
-        end
-    end 
+        end    
+    end
 
+    print "pools:"
+    for k, v in pairs(self.pools) do
+        print(k, v , #v)
+    end
 
     self.entities, self.layers = level_module.load(self.entities, self.layers)
 
@@ -59,7 +63,7 @@ function level:update(dt)
         for key, ent in ipairs(group) do
             if ent.update then
                 if ent.despawn then
-                    table.remove(group, key)    
+                    table.insert(self.pools[groupName], table.remove(group, key))
                 end
                 if ent.dead then
                     if ent.death then 

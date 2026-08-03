@@ -14,21 +14,21 @@ function level.load(entities, layers)
         tidal_sine = function(self)
             if math.floor(self.age) % 2  == 0 then
                 for i = 1, 3, 1 do
-                    table.insert(entities.bullets, bullet({
+                    bullet({
                         pos = vector.new(self.pos.x + math.sin(math.floor(self.age) / i * 0.15) * 250, self.pos.y),
                         velocity = vector.new(0, i + 2),
                         acceleration = vector.new(0, 0),
                         radius = 3, 
                         sprite_key = "energyball", 
                         color = "orange"
-                    }))
+                    })
                 end
             end
         end,
         spread = function(self)
             if math.floor(self.age) % 3  == 0 then
                 for i = 0, 150, 1 do
-                    table.insert(entities.bullets, bullet({
+                    bullet({
                         pos = self.pos,
                         velocity = vector.from_angle(math.pi/64 * i * math.floor(self.age) % 6, 4),
                         acceleration = vector.from_angle(math.pi/64 * i, 0),
@@ -36,7 +36,7 @@ function level.load(entities, layers)
                         radius = 3, 
                         sprite_key = "energyball", 
                         color  = "orange"
-                    }))
+                    })
                 end
             end
         end,

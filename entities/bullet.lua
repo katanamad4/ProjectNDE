@@ -1,7 +1,7 @@
 state = require("state")
 vector = require("vector")
 
-return function(data)
+bullet = function(data)
     local entity = {}
     entity.__index = entity
     entity.type = "bullet"
@@ -12,10 +12,8 @@ return function(data)
     entity.sprite_key = data.sprite_key
     entity.color = state.palette[data.color] or state.palette.white --i should add coustom colors to the data table 
     entity.despawn = false
-    entity.dead = false
     entity.sprite = state.sprites[entity.sprite_key]
     entity.age = 0 
-
 
     entity.draw = function(self)
         if not self.sprite or not self.sprite.image then return end
@@ -50,6 +48,10 @@ return function(data)
     entity.death = function(self)
         print("bullet dead!")
     end
-        
-    return entity
+
+    table.insert(state.current_level.entities.bullets, table.remove(state.current_level.pools.bullets))
+    state.current_level.entities.bullets[#state.current_level.entities.bullets] = entity
+
 end
+
+return bullet

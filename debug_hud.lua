@@ -11,11 +11,17 @@ debug.entries = {
     end,
     entities = function(self, y)
         local entityAmount = 0
+        local freePool = 0
         for groupName, group in pairs(state.current_level.entities) do
             entityAmount = entityAmount + #group
-            -- use the group.layer var that i didnt add at the moment to manage the y position
+
         end
-        love.graphics.print("all Entities: " .. entityAmount, 10, y + #state.current_level.entities)
+
+        for groupName, group in pairs(state.current_level.pools) do
+            freePool = freePool + #group
+        end
+
+        love.graphics.print("all Entities: " .. entityAmount .. "free pool: " .. freePool, 10, y + #state.current_level.entities )
 
     end,
     movement_v = function(self, y)
@@ -41,6 +47,7 @@ debug.entries = {
     time_scale = function(self, y)
         love.graphics.print("time_scale:" .. state.time_scale, 10, y)
     end
+
 }
 
 
@@ -53,8 +60,9 @@ function debug.draw()
         n = n + 1
         entry(debug, n * debug.line_spacing + 5)
     end
-    --debug should use deep too
-    
+    -- the way this works is mega shit,
+    -- i should make a metatable to add to the y of the next line each time a line is printed    
 end
+
 
 return debug
