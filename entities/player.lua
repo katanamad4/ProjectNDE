@@ -85,14 +85,14 @@ return function(data)
                 for i = -2, 2, 1 do
                     table.insert(
                         state.current_level.entities.shots,
-                        shot(
-                            self.pos,
-                            vector.from_angle(math.rad(270 + i * 5) ) * 20,
-                            vector.new(),
-                            3,
-                            "knife",
-                            "transparent"
-                        )
+                        shot({
+                            pos = self.pos,
+                            velocity = vector.from_angle(math.rad(270 + i * 5) ) * 20,
+                            acceleration = vector.new(),
+                            radius = 3,
+                            sprite_key = "knife",
+                            color = "transparent"
+                        })
                     )
                 end
             end
