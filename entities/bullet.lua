@@ -1,16 +1,16 @@
 state = require("state")
 vector = require("vector")
 
-return function(pos, velocity, acceleration, radius, sprite_key, color, script)
+return function(data)
     local entity = {}
     entity.__index = entity
     entity.type = "bullet"
-    entity.pos = pos
-    entity.velocity = velocity
-    entity.acceleration = acceleration
-    entity.radius = radius
-    entity.sprite_key = sprite_key
-    entity.color = state.palette[color] or state.palette.white
+    entity.pos = data.pos
+    entity.velocity = data.velocity
+    entity.acceleration = data.acceleration
+    entity.radius = data.radius
+    entity.sprite_key = data.sprite_key
+    entity.color = state.palette[data.color] or state.palette.white --i should add coustom colors to the data table 
     entity.despawn = false
     entity.dead = false
     entity.sprite = state.sprites[entity.sprite_key]
