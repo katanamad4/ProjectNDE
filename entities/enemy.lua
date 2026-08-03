@@ -4,15 +4,15 @@ local bullet = require("entities/bullet")
 
 
 
-return function(start_pos, sprite_key, script)
+return function(data)
     local entity = {}
     entity.__index = entity
     entity.type = "enemy"
-    entity.pos = start_pos
-    entity.script = script
+    entity.pos = data.pos
+    entity.script = data.script
     entity.health = 1000
     entity.radius = 40
-    entity.sprite_key = sprite_key
+    entity.sprite_key = data.sprite_key
     entity.sprite = state.sprites[entity.sprite_key]
     entity.invincible = 0
     entity.age = 0
