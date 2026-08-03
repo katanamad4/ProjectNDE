@@ -9,7 +9,22 @@ level.load = function(name)
     local level_module = require("levels/" .. name)
 
     local self = setmetatable({}, level)
-    self.entities, self.layers = level_module.load()
+
+    self.entities = {
+        player = {},
+        shots = {},
+        bullets = {},
+        enemies = {},
+        hud = {},
+        debug = {}
+    }
+
+    self.layers = {}
+    for k, _ in pairs(self.entities) do
+        self.layers[k] = deep:new()
+    end
+    
+    self.entities, self.layers = level_module.load(self.entities, self.layers)
 
     return self
 end
@@ -22,6 +37,9 @@ function level:update(dt)
             if ent.update then
                 if ent.despawn then
                     table.remove(group, key)    
+                end
+                if ent.dead then
+                    table.remove(group, key)
                 end
                 ent:update(dt)
             end

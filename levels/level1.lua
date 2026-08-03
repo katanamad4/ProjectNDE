@@ -8,20 +8,7 @@ local deep = require "deep"
 
 local level = {}
 
-function level.load()
-    local entities = {
-        player = {},
-        shots = {},
-        bullets = {},
-        enemies = {},
-        hud = {},
-        debug = {}
-    }
-
-    local layers = {}
-    for k, _ in pairs(entities) do
-        layers[k] = deep:new()
-    end
+function level.load(entities, layers)
 
     local enemy_script = {
         tidal_sine = function(self)
@@ -43,7 +30,7 @@ function level.load()
                 for i = 0, 150, 1 do
                     table.insert(entities.bullets, bullet(
                         vector.new(self.pos.x, self.pos.y),
-                        vector.from_angle(math.pi/64 * i * math.floor(self.age) % 6, 4 * (i % 2)),
+                        vector.from_angle(math.pi/64 * i * math.floor(self.age) % 6, 1),
                         vector.from_angle(math.pi/64 * i, 0),
                         -- vector.new(),
                         3, 
