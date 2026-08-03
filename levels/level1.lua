@@ -48,7 +48,11 @@ function level.load(entities, layers)
         dimensions = state.pf_dimensions,
         border = 10
     }))
-    entities.player[1] = player(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2, state.pf_pos.y + (state.pf_dimensions.y / 3 ) * 2), "goob")
+    entities.player[1] = player({
+        pos = vector.new(state.pf_pos.x + state.pf_dimensions.x / 2, state.pf_pos.y + (state.pf_dimensions.y / 3 ) * 2),
+        sprite_key = "goob",
+        
+    })
     table.insert(entities.enemies, enemy(vector.new(state.pf_pos.x + state.pf_dimensions.x / 2 , 200), "jerky", enemy_script.spread))
 
     return entities, layers

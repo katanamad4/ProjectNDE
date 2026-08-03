@@ -3,16 +3,16 @@ local state = require("state")
 local shot = require("entities/shot")
 
 
-return function(pos, sprite_key)
+return function(data)
     local entity = {}
     entity.__index = entity
     entity.type = "player"
-    entity.pos = pos
+    entity.pos = data.pos
     entity.velocity = vector.new()
-    entity.radius = 1.2
-    entity.maxspeed = 6.0
-    entity.sprite_key = sprite_key
-    entity.invincible = 0
+    entity.radius = data.radius or 1.2
+    entity.maxspeed = data.maxspeed or 6.0
+    entity.sprite_key = data.sprite_key
+    entity.invincible = data.invincible or 0
     entity.visible = true
     entity.sprite = state.sprites[entity.sprite_key]
 
