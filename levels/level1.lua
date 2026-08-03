@@ -26,7 +26,7 @@ function level.load(entities, layers)
             end
         end,
         spread = function(self)
-            if math.floor(self.age) % 5  == 0 then
+            if math.floor(self.age) % 3  == 0 then
                 for i = 0, 150, 1 do
                     table.insert(entities.bullets, bullet(
                         vector.new(self.pos.x, self.pos.y),

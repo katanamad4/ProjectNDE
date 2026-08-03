@@ -24,6 +24,29 @@ level.load = function(name)
         self.layers[k] = deep:new()
     end
     
+    self.pools = {}
+    for groupName, group in pairs(self.entities) do
+        self.pools[groupName] = {} 
+        if groupName == "bullets" then
+            for i = 1, 100000, 1 do
+                table.insert(self.pools[groupName], {})
+            end
+        elseif groupName == "shots" then
+            for i = 1, 1000, 1 do
+                table.insert(self.pools[groupName], {})
+            end
+        elseif groupName == "enemies" then
+            for i = 1, 100, 1 do
+                table.insert(self.pools[groupName], {})
+            end
+        else
+            for i = 1, 10, 1 do
+                table.insert(self.pools[groupName], {})
+            end
+        end
+    end 
+
+
     self.entities, self.layers = level_module.load(self.entities, self.layers)
 
     return self
