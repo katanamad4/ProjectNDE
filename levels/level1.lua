@@ -26,7 +26,7 @@ function level.load(entities, layers)
         end,
         spread = function(self)
             if math.floor(self.age) % 3  == 0 then
-                for i = 0, 160, 1 do
+                for i = 0, 180, 1 do
                     bullet({
                         pos = self.pos,
                         velocity = vector.from_angle(math.pi/64 * i * math.floor(self.age) % 6, 4),
@@ -69,7 +69,7 @@ function level.load(entities, layers)
     table.insert(entities.enemies, enemy({
         pos = vector.new(state.pf_pos.x + state.pf_dimensions.x / 2 , 200),
         sprite_key = "jerky",
-        script = enemy_script.pool_test
+        script = enemy_script.spread
     }))
 
     return entities, layers

@@ -66,6 +66,9 @@ function level:update(dt)
 
             if ent.update then
                 ent:update(dt)
+                if not vector.pos_in_pf(ent.pos, 5) then
+                    ent.despawn = true
+                end 
             end
             if ent.despawn or ent.dead then
                 if ent.dead and ent.death then    
@@ -75,7 +78,7 @@ function level:update(dt)
                 group[key] = group[#group]
                 group[#group] = nil
                 self.pools[groupName][#self.pools[groupName] + 1] = removed
-                print("removed " .. groupName .. " "  .. key)
+                -- print("removed " .. groupName .. " "  .. key)
             else
                 key = key + 1
             end

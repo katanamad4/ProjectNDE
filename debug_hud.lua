@@ -21,8 +21,8 @@ debug.entries = {
         end
 
         love.graphics.print("all Entities: " .. entityAmount .. " free pool: " .. freePool, 10, y + #state.current_level.entities )
-        print("all Entities: " .. entityAmount .. " free pool: " .. freePool)
-        print("shit pool: " .. #state.current_level.pools.shots .. " shits: " .. #state.current_level.entities.shots)
+        -- print("all Entities: " .. entityAmount .. " free pool: " .. freePool)
+        -- print("shit pool: " .. #state.current_level.pools.shots .. " shits: " .. #state.current_level.entities.shots)
     end,
     movement_v = function(self, y)
         if state.movement_vector then

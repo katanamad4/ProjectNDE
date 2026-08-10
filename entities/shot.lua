@@ -43,15 +43,12 @@ shot = function(data)
     end
 
     entity.update = function(self)
-        if not vector.pos_in_pf(self.pos, 10) then
-            self.despawn = true
-        end 
         self.pos = self.pos + self.velocity
         self.velocity = self.velocity + self.acceleration
     end
 
     entity.death = function(self)
-        print "shot dead!"
+        -- print "shot dead!"
     end
 
     table.insert(state.current_level.entities.shots, entity)   
