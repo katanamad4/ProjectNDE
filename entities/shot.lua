@@ -1,8 +1,12 @@
 local vector = require("vector")
 
 
-return function(data)
-    local entity = {}
+shot = function(data)
+    local entity = table.remove(state.current_level.pools.shots)
+
+    if not entity then
+        return
+    end
     entity.__index = entity
     entity.type = "shot"
     entity.pos = data.pos
@@ -12,6 +16,7 @@ return function(data)
     entity.sprite_key = data.sprite_key
     entity.color = state.palette[data.color] or state.palette.white --i should add coustom colors to the data table 
     entity.dead = false
+    entity.despawn = false
     entity.sprite = state.sprites[entity.sprite_key]
     entity.damage = 1
 
@@ -49,5 +54,7 @@ return function(data)
         print "shot dead!"
     end
 
-    return entity
+    table.insert(state.current_level.entities.shots, entity)   
 end
+
+return shot

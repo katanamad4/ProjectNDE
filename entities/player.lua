@@ -83,17 +83,14 @@ return function(data)
         if state.keys_down.shooting then
             if state.time % 2 == 0 then
                 for i = -2, 2, 1 do
-                    table.insert(
-                        state.current_level.entities.shots,
-                        shot({
-                            pos = self.pos,
-                            velocity = vector.from_angle(math.rad(270 + i * 5) ) * 20,
-                            acceleration = vector.new(),
-                            radius = 3,
-                            sprite_key = "knife",
-                            color = "transparent"
-                        })
-                    )
+                    shot({
+                        pos = self.pos,
+                        velocity = vector.from_angle(math.rad(270 + i * 5) ) * 20,
+                        acceleration = vector.new(),
+                        radius = 3,
+                        sprite_key = "knife",
+                        color = "transparent"
+                    })
                 end
             end
         end 

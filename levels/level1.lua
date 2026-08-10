@@ -69,7 +69,7 @@ function level.load(entities, layers)
     table.insert(entities.enemies, enemy({
         pos = vector.new(state.pf_pos.x + state.pf_dimensions.x / 2 , 200),
         sprite_key = "jerky",
-        script = enemy_script.spread
+        script = enemy_script.pool_test
     }))
 
     return entities, layers

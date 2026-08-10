@@ -16,6 +16,7 @@ bullet = function(data)
     entity.sprite_key = data.sprite_key or "energyball"
     entity.color = state.palette[data.color] or state.palette.white --i should add coustom colors to the data table 
     entity.despawn = false
+    entity.dead = false
     entity.sprite = state.sprites[entity.sprite_key]
     entity.age = 0 
 

@@ -72,7 +72,11 @@ function level:update(dt)
                     if ent.death then 
                         ent:death()
                     end
-                    table.remove(group, key)
+                    local removed = group[key]
+                    group[key] = group[#group]
+                    group[#group] = nil
+                    table.insert(self.pools[groupName], removed)
+                    print("died " .. groupName .. " "  .. key)
                 end
                 ent:update(dt)
             end
