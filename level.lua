@@ -59,26 +59,25 @@ end
 
 function level:update(dt)
     for groupName, group in pairs(self.entities) do
-        for key, ent in ipairs(group) do
+        -- for key, ent in ipairs(group) do
+        local key = 1
+        while key <= #group do
+            local ent = group[key]
+
             if ent.update then
-                if ent.despawn then
-                    local removed = group[key]
-                    group[key] = group[#group]
-                    group[#group] = nil
-                    table.insert(self.pools[groupName], removed)
-                    print("removed " .. groupName .. " "  .. key)
-                end
-                if ent.dead then
-                    if ent.death then 
-                        ent:death()
-                    end
-                    local removed = group[key]
-                    group[key] = group[#group]
-                    group[#group] = nil
-                    table.insert(self.pools[groupName], removed)
-                    print("died " .. groupName .. " "  .. key)
-                end
                 ent:update(dt)
+            end
+            if ent.despawn or ent.dead then
+                if ent.dead and ent.death then    
+                    ent:death()
+                end
+                local removed = ent
+                group[key] = group[#group]
+                group[#group] = nil
+                self.pools[groupName][#self.pools[groupName] + 1] = removed
+                print("removed " .. groupName .. " "  .. key)
+            else
+                key = key + 1
             end
         end
     end 
