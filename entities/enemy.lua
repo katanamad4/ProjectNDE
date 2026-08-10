@@ -1,5 +1,5 @@
 local vector = require("vector")
-local state = require("state")
+
 local bullet = require("entities/bullet")
 
 

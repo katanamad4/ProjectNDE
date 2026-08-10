@@ -1,15 +1,19 @@
-state = require("state")
 vector = require("vector")
 
 bullet = function(data)
-    local entity = {}
+    local entity = table.remove(state.current_level.pools.bullets)
+
+    if not entity then
+        return
+    end
+
     entity.__index = entity
     entity.type = "bullet"
-    entity.pos = data.pos
-    entity.velocity = data.velocity
-    entity.acceleration = data.acceleration
-    entity.radius = data.radius
-    entity.sprite_key = data.sprite_key
+    entity.pos = data.pos or vector.new()
+    entity.velocity = data.velocity or vector.new()
+    entity.acceleration = data.acceleration or vector.new()
+    entity.radius = data.radius or 3
+    entity.sprite_key = data.sprite_key or "energyball"
     entity.color = state.palette[data.color] or state.palette.white --i should add coustom colors to the data table 
     entity.despawn = false
     entity.sprite = state.sprites[entity.sprite_key]
@@ -48,10 +52,7 @@ bullet = function(data)
     entity.death = function(self)
         print("bullet dead!")
     end
-
-    table.insert(state.current_level.entities.bullets, table.remove(state.current_level.pools.bullets))
-    state.current_level.entities.bullets[#state.current_level.entities.bullets] = entity
-
+    table.insert(state.current_level.entities.bullets, entity)
 end
 
 return bullet

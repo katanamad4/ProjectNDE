@@ -1,5 +1,5 @@
 
-local state = require("state")
+state = require("state")
 local input = require("input")
 local debug_hud = require("debug_hud")
 local level = require("level")
@@ -7,7 +7,7 @@ local level = require("level")
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
 function love.load(args)
-    -- init something here ...
+    local load_start = love.timer.getTime( )
     love.window.setTitle('Project Near Death Experience') 
     for _, v in ipairs(args) do
         if v == "--debug" then
@@ -20,7 +20,7 @@ function love.load(args)
     state.current_level = level.load("level1")
     love.mouse.setRelativeMode(true)
     state.rng = love.math.newRandomGenerator( 1337148867695242 )
-    print "hi"
+    print("loading finished in " .. love.timer.getTime() - load_start)
 end
 
 

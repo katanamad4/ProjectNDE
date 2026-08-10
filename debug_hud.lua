@@ -1,4 +1,3 @@
-local state = require("state")
 
 
 local debug = {}
@@ -21,8 +20,8 @@ debug.entries = {
             freePool = freePool + #group
         end
 
-        love.graphics.print("all Entities: " .. entityAmount .. "free pool: " .. freePool, 10, y + #state.current_level.entities )
-
+        love.graphics.print("all Entities: " .. entityAmount .. " free pool: " .. freePool, 10, y + #state.current_level.entities )
+        print("all Entities: " .. entityAmount .. " free pool: " .. freePool)
     end,
     movement_v = function(self, y)
         if state.movement_vector then

@@ -2,7 +2,6 @@ local player = require("entities/player")
 local bullet = require("entities/bullet")
 local playfield = require("entities/playefield")
 local enemy = require("entities/enemy")
-local state = require("state")
 local vector = require("vector")
 local deep = require "deep"
 
@@ -27,7 +26,7 @@ function level.load(entities, layers)
         end,
         spread = function(self)
             if math.floor(self.age) % 3  == 0 then
-                for i = 0, 150, 1 do
+                for i = 0, 160, 1 do
                     bullet({
                         pos = self.pos,
                         velocity = vector.from_angle(math.pi/64 * i * math.floor(self.age) % 6, 4),
@@ -36,6 +35,20 @@ function level.load(entities, layers)
                         radius = 3, 
                         sprite_key = "energyball", 
                         color  = "orange"
+                    })
+                end
+            end
+        end,
+        pool_test = function(self)
+            if math.floor(self.age) % 1  == 0 then
+                for i = -2, 2 , 1 do
+                    bullet({
+                        pos = self.pos,
+                        velocity = vector.from_angle(math.pi/2 + i, 10 ),
+                        acceleration = vector.new(),
+                        radius = 3, 
+                        sprite_key = "energyball", 
+                        color  = "purple"
                     })
                 end
             end

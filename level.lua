@@ -23,7 +23,6 @@ level.load = function(name)
     for k, _ in pairs(self.entities) do
         self.layers[k] = deep:new()
     end
-    
     self.pools = {}
     for groupName, group in pairs(self.entities) do
         self.pools[groupName] = {} 
@@ -43,7 +42,7 @@ level.load = function(name)
             for i = 1, 10, 1 do
                 table.insert(self.pools[groupName], {})
             end
-        end    
+        end
     end
 
     print "pools:"
@@ -63,7 +62,11 @@ function level:update(dt)
         for key, ent in ipairs(group) do
             if ent.update then
                 if ent.despawn then
-                    table.insert(self.pools[groupName], table.remove(group, key))
+                    local removed = group[key]
+                    group[key] = group[#group]
+                    group[#group] = nil
+                    table.insert(self.pools[groupName], removed)
+                    print("removed " .. groupName .. " "  .. key)
                 end
                 if ent.dead then
                     if ent.death then 
