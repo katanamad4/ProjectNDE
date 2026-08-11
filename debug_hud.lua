@@ -25,16 +25,16 @@ debug.entries = {
         -- print("shit pool: " .. #state.current_level.pools.shots .. " shits: " .. #state.current_level.entities.shots)
     end,
     movement_v = function(self, y)
-        if state.movement_vector then
+        if state.movement_vec then
             love.graphics.print(
-                "Movement: " .. state.movement_vector.x .. ", " .. state.movement_vector.y, 10, y)
+                "Movement: " .. state.movement_vecX .. ", " .. state.movement_vecY, 10, y)
         end
     end,
     lives = function(self, y)
         love.graphics.print("Lives:" .. state.lives .. " invincible:" .. state.player.invincible, 10, y)
     end,
     pos = function(self, y)
-        love.graphics.print("player.pos x: " .. state.player.pos.x .. " y: " .. state.player.pos.y , 10, y)
+        love.graphics.print("player.pos x: " .. state.player.posX .. " y: " .. state.player.posY , 10, y)
     end,
     shooting = function(self, y)
         if state.keys_down.shooting then

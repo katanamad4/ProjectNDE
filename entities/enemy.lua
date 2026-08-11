@@ -1,4 +1,4 @@
-local vector = require("vector")
+local vec = require("vector")
 
 local bullet = require("entities/bullet")
 
@@ -8,7 +8,14 @@ return function(data)
     local entity = {}
     entity.__index = entity
     entity.type = "enemy"
-    entity.pos = data.pos
+    entity.posX = data.posX 
+    entity.posY = data.posY
+    entity.velX = data.velX or 0
+    entity.velY = data.velY or 0
+    entity.accelX = data.accelX or 0
+    entity.accelY = data.accelY or 0
+    entity.radius = data.radius or 3
+    entity.angle = vec.toPolar(entity.velX, entity.velX) 
     entity.script = data.script
     entity.health = 1000
     entity.radius = 40
@@ -28,18 +35,18 @@ return function(data)
             love.graphics.setColor(state.palette.white)
             love.graphics.draw(
             self.sprite.image,
-            self.pos.x,
-            self.pos.y,
-            0,                 
+            self.posX,
+            self.posY,
+            self.angle,                 
             self.sprite.scale,
             self.sprite.scale,
-            self.sprite.offset.x,
-            self.sprite.offset.y
+            self.sprite.offsetX,
+            self.sprite.offsetY
             )
         end
         if state.debug then
             love.graphics.setColor(state.palette.magenta)
-            love.graphics.circle("line", self.pos.x, self.pos.y, self.radius)
+            love.graphics.circle("line", self.posX, self.posY, self.radius)
         end
     end
 --TODO: add enemy movement 

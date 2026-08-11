@@ -66,7 +66,7 @@ function level:update(dt)
 
             if ent.update then
                 ent:update(dt)
-                if not vector.pos_in_pf(ent.pos, 5) then
+                if not vec.posInPf(ent.posX, ent.posY , state.pf_entities_border_offset) then
                     ent.despawn = true
                 end 
             end

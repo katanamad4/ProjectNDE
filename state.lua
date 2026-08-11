@@ -1,24 +1,31 @@
-vector = require("vector")
+vec = require("vector")
 
 local state = {}
 
 state.lives = 5
-state.movement_vector = vector.new()
-state.movement_direction = vector.new()
+state.movement_vecX = 0
+state.movement_vecY = 0
+state.movement_directionX = 0
+state.movement_directionY = 0
 state.movement_multiplier = 1.0
 state.focus_movement_multiplier = 0.6
 state.paused = false
-state.player = { pos = {}}
+state.player = {}
 state.debug = false
-state.current_level = nil
+state.current_level = {}
 state.time = 0
 state.time_scale = 1
-state.window_dimensions = vector.new(1366, 768)
-state.pf_dimensions = vector.new(math.floor(1366 * 0.35), 768 - 20)
-state.pf_pos = vector.new(math.floor(1366 / 3), 10)
+state.window_dimensionsX = 1366
+state.window_dimensionsY = 768
+state.pf_dimensionsX = math.floor(state.window_dimensionsX * 0.35)
+state.pf_dimensionsY = state.window_dimensionsY - 20
+state.pf_posX = math.floor(state.window_dimensionsX / 3)
+state.pf_posY = 10
 state.pf_player_border_offset = -10
+state.pf_entities_border_offset = 5
 state.mouse_controls = false
-state.mouse_delta = vector.new()
+state.mouse_deltaX = 0
+state.mouse_deltaY = 0
 state.key_map = {
     left   = "move_left",
     right  = "move_right",
@@ -43,27 +50,32 @@ state.keys_down = {
 state.sprites = {
     goob = {
         path = "assets/goob.png",
-        offset = vector.new(40, 40),
+        offsetX = 40,
+        offsetY = 40,
         scale = 0.7
     },
     grayball = {
         path = "assets/grayball.png",
-        offset = vector.new(32, 32),
+        offsetX = 32,
+        offsetY = 32,
         scale = 0.06
     },
     energyball = {
         path = "assets/energyball.png",
-        offset = vector.new(96, 32),
+        offsetX = 96,
+        offsetY = 32,
         scale = 0.06
     },
     jerky = {
         path = "assets/jerky.png",
-        offset = vector.new(64, 64),
+        offsetX = 64,
+        offsetY = 64,
         scale = 0.8,
     },
     knife = {
         path = "assets/knife.png",
-        offset = vector.new(32, 32),
+        offsetX = 32,
+        offsetY = 32,
         scale = 0.28
     },
 }

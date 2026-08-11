@@ -36,9 +36,9 @@ love.keyreleased = function(released_key)
   input.release(released_key)
 end
 
-love.mousemoved = function(x, y, dx, dy)
-    state.mouse_delta.x = dx
-    state.mouse_delta.y = dy
+love.mousemoved = function(X, Y, dX, dY)
+    state.mouse_deltaX = dX
+    state.mouse_deltaY = dY
 end
 
 love.draw = function()

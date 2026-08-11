@@ -1,44 +1,49 @@
-local vector = require("vector")
-
+local state = require("state")
 
 return function(data)
-    entity = {}
-    entity.pos = data.pos
-    entity.dimensions = data.dimensions
+    local entity = {}
+
+    entity.posX = data.posX
+    entity.posY = data.posY
+    entity.dimensionsX = data.dimensionsX
+    entity.dimensionsY = data.dimensionsY
     entity.border = data.border or 10
 
-    entity.draw = function(self)
+    function entity:draw()
         love.graphics.setColor(state.palette.white)
+
         love.graphics.rectangle(
-        "fill",
-        self.pos.x - self.border,
-        self.pos.y + self.border,
-        self.dimensions.x + self.border * 2,
-        self.border
+            "fill",
+            self.posX - self.border,
+            self.posY - self.border,
+            self.dimensionsX + self.border * 2,
+            self.border
         )
+
         love.graphics.rectangle(
-        "fill",
-        self.dimensions.x + self.pos.x, 
-        self.pos.y + self.border,
-        self.border,
-        self.dimensions.y 
+            "fill",
+            self.posX + self.dimensionsX,
+            self.posY,
+            self.border,
+            self.dimensionsY
         )
+
         love.graphics.rectangle(
-        "fill",
-        self.pos.x - self.border,
-        self.pos.y + self.dimensions.y,
-        self.dimensions.x + self.border * 2,
-        self.border
+            "fill",
+            self.posX - self.border,
+            self.posY + self.dimensionsY,
+            self.dimensionsX + self.border * 2,
+            self.border
         )
+
         love.graphics.rectangle(
-        "fill",
-        self.pos.x - self.border, 
-        self.pos.y + self.border,
-        self.border,
-        self.dimensions.y 
+            "fill",
+            self.posX - self.border,
+            self.posY,
+            self.border,
+            self.dimensionsY
         )
     end
-    
 
     return entity
 end
