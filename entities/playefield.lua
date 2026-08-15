@@ -1,7 +1,11 @@
 local state = require("state")
 
-return function(data)
-    local entity = {}
+playfield = function(data, level)
+    local entity = table.remove(level.pools.hud)
+
+    if not entity then
+        return
+    end
 
     entity.posX = data.posX
     entity.posY = data.posY
@@ -45,5 +49,7 @@ return function(data)
         )
     end
 
-    return entity
+    table.insert(level.entities.hud, entity)
 end
+
+return playfield

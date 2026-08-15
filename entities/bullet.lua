@@ -1,7 +1,7 @@
 vec = require("vector")
 
-bullet = function(data)
-    local entity = table.remove(state.current_level.pools.bullets)
+bullet = function(data, level)
+    local entity = table.remove(level.pools.bullets)
 
     if not entity then
         return
@@ -56,7 +56,7 @@ bullet = function(data)
     entity.death = function(self)
         -- print("bullet dead!")
     end
-    table.insert(state.current_level.entities.bullets, entity)
+    table.insert(level.entities.bullets, entity)
 end
 
 return bullet

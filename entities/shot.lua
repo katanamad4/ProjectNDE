@@ -1,8 +1,8 @@
 local vec = require("vector")
 
 
-shot = function(data)
-    local entity = table.remove(state.current_level.pools.shots)
+shot = function(data, level)
+    local entity = table.remove(level.pools.shots)
 
     if not entity then
         return
@@ -63,7 +63,7 @@ shot = function(data)
         -- print "shot dead!"
     end
 
-    table.insert(state.current_level.entities.shots, entity)   
+    table.insert(level.entities.shots, entity)   
 end
 
 return shot

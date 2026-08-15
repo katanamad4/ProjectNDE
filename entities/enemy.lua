@@ -4,8 +4,12 @@ local bullet = require("entities/bullet")
 
 
 
-return function(data)
-    local entity = {}
+enemy = function(data, level)
+    local entity = table.remove(level.pools.enemies)
+
+    if not entity then
+        return
+    end
     entity.__index = entity
     entity.type = "enemy"
     entity.posX = data.posX 
@@ -58,9 +62,10 @@ return function(data)
 
         self.age = self.age + state.time_scale
         if self.script then 
-            self.script(self)
+            self.script(self, level)
         end    
     end
 
-    return entity
+    table.insert(level.entities.enemies, entity)
 end
+return enemy

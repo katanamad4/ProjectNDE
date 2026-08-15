@@ -50,7 +50,7 @@ level.load = function(name)
         print(k, v , #v)
     end
 
-    self.entities, self.layers = level_module.load(self.entities, self.layers)
+    level_module.load(self)
 
     return self
 end

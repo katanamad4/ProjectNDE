@@ -3,8 +3,11 @@ local vec = require("vector")
 local shot = require("entities/shot")
 
 
-return function(data)
-    local entity = {}
+player = function(data, level)
+    local entity = table.remove(level.pools.player)
+    if not entity then
+        return
+    end
     entity.__index = entity
     entity.type = "player"
     entity.posX = data.posX 
@@ -95,7 +98,7 @@ return function(data)
                         radius = 3,
                         sprite_key = "knife",
                         color = "transparent"
-                    })
+                    }, level)
                 end
             end
         end 
@@ -105,5 +108,6 @@ return function(data)
         end
         state.player = self
     end
-    return entity
+    table.insert(level.entities.enemies, entity)
 end
+return player

@@ -21,6 +21,12 @@ state.pf_dimensionsX = math.floor(state.window_dimensionsX * 0.35)
 state.pf_dimensionsY = state.window_dimensionsY - 20
 state.pf_posX = math.floor(state.window_dimensionsX / 3)
 state.pf_posY = 10
+
+-- state.pf_dimensionsX = state.window_dimensionsX - 20
+-- state.pf_dimensionsY = state.window_dimensionsY - 20
+-- state.pf_posX = 20
+-- state.pf_posY = 10
+
 state.pf_player_border_offset = -10
 state.pf_entities_border_offset = 5
 state.mouse_controls = false
