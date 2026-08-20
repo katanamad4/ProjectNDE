@@ -108,6 +108,6 @@ player = function(data, level)
         end
         state.player = self
     end
-    table.insert(level.entities.enemies, entity)
+    table.insert(level.entities.player, entity)
 end
 return player

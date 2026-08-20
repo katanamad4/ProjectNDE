@@ -15,12 +15,11 @@ state.debug = false
 state.current_level = {}
 state.time = 0
 state.time_scale = 1
-state.window_dimensionsX = 1366
-state.window_dimensionsY = 768
-state.pf_dimensionsX = math.floor(state.window_dimensionsX * 0.35)
-state.pf_dimensionsY = state.window_dimensionsY - 20
-state.pf_posX = math.floor(state.window_dimensionsX / 3)
-state.pf_posY = 10
+state.window_dimensionsX, state.window_dimensionsY = love.window.getMode( )
+state.pf_dimensionsX = 528
+state.pf_dimensionsY = 704
+state.pf_posX = (state.window_dimensionsX - state.pf_dimensionsX) / 2
+state.pf_posY = (state.window_dimensionsY - state.pf_dimensionsY) / 2
 
 -- state.pf_dimensionsX = state.window_dimensionsX - 20
 -- state.pf_dimensionsY = state.window_dimensionsY - 20

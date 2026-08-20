@@ -60,6 +60,9 @@ function debug.draw()
         n = n + 1
         entry(debug, n * debug.line_spacing + 5)
     end
+
+    love.graphics.setColor(state.palette.green)
+    love.graphics.rectangle("line", 0, 0, state.window_dimensionsX, state.window_dimensionsY)
     -- the way this works is mega shit,
     -- i should make a metatable to add to the y of the next line each time a line is printed    
 end

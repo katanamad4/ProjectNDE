@@ -27,7 +27,7 @@ function level.load(thisLevel)
         end,
         spread = function(self)
             if math.floor(self.age) % 3  == 0 then
-                for i = 1, 10, 1 do
+                for i = 1, 5, 1 do
                     vX, vY = vec.fromPolar(math.pi/5 * i * math.floor(self.age) % 7, 2)
                     aX, aY = vec.fromPolar(math.pi/5 * i, 0.01)
                     bullet({
@@ -68,7 +68,7 @@ function level.load(thisLevel)
         posY = state.pf_posY,
         dimensionsX = state.pf_dimensionsX,
         dimensionsY = state.pf_dimensionsY,
-        border = 10
+        border = 5
     }, thisLevel)
     player({
         posX = state.pf_posX + state.pf_dimensionsX / 2,
