@@ -44,7 +44,6 @@ level.load = function(name)
             end
         end
     end
-
     print "pools:"
     for k, v in pairs(self.pools) do
         print(k, v , #v)
@@ -100,6 +99,15 @@ function level:update(dt)
         end
     end
 
+    if self.segments then 
+        for eventKey, event in ipairs(self.segments[self.currentSegment]) do
+            if self.segmentTime == event.sched then
+                event.event()
+            end
+        end
+    end
+
+    self.segmentTime = self.segmentTime + 1
     state.time = state.time + state.time_scale
     state.player = state.current_level.entities.player[1]
 end

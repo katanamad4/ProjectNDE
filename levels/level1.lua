@@ -1,6 +1,6 @@
 local player = require("entities/player")
 local bullet = require("entities/bullet")
-local playfield = require("entities/playefield")
+local playfield = require("entities/playfield")
 local enemy = require("entities/enemy")
 local vec = require("vector")
 local deep = require "deep"
@@ -83,7 +83,6 @@ function level.load(thisLevel)
         script = enemy_script.spread 
     }, thisLevel)
 
-    return entities, layers
 end
 
 return level

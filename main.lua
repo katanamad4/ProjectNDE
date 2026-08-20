@@ -17,7 +17,7 @@ function love.load(args)
     for key, data in pairs(state.sprites) do
         data.image =  love.graphics.newImage(data.path)
     end
-    state.current_level = level.load("level1")
+    state.current_level = level.load("hierarchy_test")
     love.mouse.setRelativeMode(true)
     state.rng = love.math.newRandomGenerator( 1337148867695242 )
     print("loading finished in " .. love.timer.getTime() - load_start)
