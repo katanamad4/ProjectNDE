@@ -10,7 +10,7 @@ local level = {}
 function level.load(thisLevel)
 
     thisLevel.currentSegment = 1
-    thisLevel.segmentTime = 0
+    thisLevel.segmentTime = 1
 
 local enemy_script = {
     tidal_sine = function(self)
@@ -76,14 +76,14 @@ local enemy_script = {
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
                         posY = state.pf_posY + 50,
                         sprite_key = "jerky",
-                        script = enemy_script.tidal_sine
+                        script = pool_test
                     }, thisLevel)
                 end,
             },
 
             {
                 -- event 2
-                sched = 600,
+                sched = 120,
                 event = function()
                     enemy({
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
@@ -93,12 +93,41 @@ local enemy_script = {
                     }, thisLevel)
                 end,
             },
+            {
+                -- event 3
+                sched = 500,
+                incomplete = true,
+                event = function()
+                    -- for key, ent in ipairs(thisLevel.entities.enemies) do
+                    --     ent.dead = true
+                    -- end
+                    print("enemies at event 3:" .. #thisLevel.entities.enemies)
+                    if #thisLevel.entities.enemies == 0 then
+                        incomplete = false
+                        for key, ent in ipairs(thisLevel.entities.bullets) do
+                            ent.dead = true
+                        end
+                        thisLevel.currentSegment = 2
+                        thisLevel.segmentTime = 0
+                    end
+                end,
+            },
 
         },
 
         {
             --segment 2
-
+            {
+                sched = 10,
+                event = function()
+                    enemy({
+                        posX = state.pf_posX + state.pf_dimensionsX / 2,
+                        posY = state.pf_posY + state.pf_dimensionsY / 2,
+                        sprite_key = "jerky",
+                        script = enemy_script.pool_test
+                    }, thisLevel)
+                end
+            }
         },
     }
 

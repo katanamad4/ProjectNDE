@@ -57,12 +57,15 @@ end
 
 
 function level:update(dt)
+    print("time: " .. state.time .. " segmentTime: " .. self.segmentTime .. " segment: " .. self.currentSegment .. " Groups:") --temp
     for groupName, group in pairs(self.entities) do
         -- for key, ent in ipairs(group) do
+        print(groupName .. " " .. #group) --temp
+
         local key = 1
         while key <= #group do
             local ent = group[key]
-
+            -- print(key) --temp
             if ent.update then
                 ent:update(dt)
                 if not vec.posInPf(ent.posX, ent.posY , state.pf_entities_border_offset) then
@@ -101,8 +104,11 @@ function level:update(dt)
 
     if self.segments then 
         for eventKey, event in ipairs(self.segments[self.currentSegment]) do
-            if self.segmentTime == event.sched then
+            if self.segmentTime >= event.sched then
                 event.event()
+                if not event.incomplete then
+                    table.remove(self.segments[self.currentSegment], eventKey)
+                end
             end
         end
     end

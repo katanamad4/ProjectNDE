@@ -23,7 +23,7 @@ shot = function(data, level)
     entity.script = data.script
     entity.dead = false
     entity.despawn = false
-    entity.damage = 1
+    entity.damage = 5
     entity.age = 0 
 
 

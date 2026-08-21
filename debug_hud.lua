@@ -46,7 +46,11 @@ debug.entries = {
     end,
     time_scale = function(self, y)
         love.graphics.print("time_scale:" .. state.time_scale, 10, y)
-    end
+    end,
+    enemies = function(self, y)
+        love.graphics.print("enemies:" .. #state.current_level.entities, 10, y)
+
+    end,
 
 }
 

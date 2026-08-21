@@ -1,6 +1,5 @@
 local vec = require("vector")
 
-local bullet = require("entities/bullet")
 
 
 
@@ -19,7 +18,7 @@ enemy = function(data, level)
     entity.accelX = data.accelX or 0
     entity.accelY = data.accelY or 0
     entity.radius = data.radius or 3
-    entity.angle = vec.toPolar(entity.velX, entity.velX) 
+    entity.angle = vec.toPolar(entity.velX, entity.velY) 
     entity.script = data.script
     entity.health = 1000
     entity.radius = 40
@@ -27,6 +26,8 @@ enemy = function(data, level)
     entity.sprite = state.sprites[entity.sprite_key]
     entity.invincible = 0
     entity.age = 0
+    entity.dead = false
+    entity.despawn = false
 
     entity.hit = function(self, damage)
         self.health = self.health - damage
