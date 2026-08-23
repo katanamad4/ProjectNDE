@@ -1,5 +1,7 @@
 local colision = require("colision")
 local deep = require "deep"
+local profiler = require "profiler"
+
 
 local level = {}
 
@@ -55,13 +57,48 @@ level.load = function(name)
 end
 
 
-
 function level:update(dt)
-    print("time: " .. state.time .. " segmentTime: " .. self.segmentTime .. " segment: " .. self.currentSegment .. " Groups:") --temp
-    for groupName, group in pairs(self.entities) do
-        -- for key, ent in ipairs(group) do
-        print(groupName .. " " .. #group) --temp
+    -- print("time: " .. state.time .. " segmentTime: " .. self.segmentTime .. " segment: " .. self.currentSegment .. " Groups:") --temp
+    profiler.start("updEnt")
+    self:updateEntities(dt)
+    profiler.stop("updEnt")
 
+    profiler.start("Colisions")
+    self:checkEntColisions()
+    profiler.stop("Colisions")
+
+    profiler.start("Events")
+    self:runEvents()
+    profiler.stop("Events")
+
+    self.segmentTime = self.segmentTime + 1
+    state.time = state.time + state.time_scale
+    state.player = state.current_level.entities.player[1]
+    profiler:print()
+end
+
+function level:draw()
+    profiler.start("draw")
+    for groupName, group in pairs(self.entities) do
+        for key, ent in ipairs(group) do
+           self.layers[groupName]:queue(key, ent:draw())
+        end
+    end  
+    self.layers.shots:draw()
+    self.layers.player:draw()
+    self.layers.bullets:draw()
+    self.layers.enemies:draw()
+    self.layers.hud:draw()
+    self.layers.debug:draw()
+    profiler.stop("draw")
+   
+
+end
+
+
+function level.updateEntities(self, dt)
+    for groupName, group in pairs(self.entities) do
+        profiler.start(groupName .. "UpDate")
         local key = 1
         while key <= #group do
             local ent = group[key]
@@ -85,8 +122,11 @@ function level:update(dt)
                 key = key + 1
             end
         end
-    end 
+        profiler.stop(groupName .. "UpDate")
+    end
+end
 
+function level.checkEntColisions(self)
     for key, bullet in ipairs(self.entities.bullets) do
         if colision.circle_circle(state.player, bullet) and state.player.invincible <= 0 then
             state.player:hit()
@@ -101,7 +141,10 @@ function level:update(dt)
             end
         end
     end
+end
 
+
+function level.runEvents(self)
     if self.segments then 
         for eventKey, event in ipairs(self.segments[self.currentSegment]) do
             if self.segmentTime >= event.sched then
@@ -112,26 +155,5 @@ function level:update(dt)
             end
         end
     end
-
-    self.segmentTime = self.segmentTime + 1
-    state.time = state.time + state.time_scale
-    state.player = state.current_level.entities.player[1]
 end
-
-function level:draw()
-    for groupName, group in pairs(self.entities) do
-        for key, ent in ipairs(group) do
-           self.layers[groupName]:queue(key, ent:draw())
-        end
-    end  
-    self.layers.shots:draw()
-    self.layers.player:draw()
-    self.layers.bullets:draw()
-    self.layers.enemies:draw()
-    self.layers.hud:draw()
-    self.layers.debug:draw()
-   
-
-end
-
 return level

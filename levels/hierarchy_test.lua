@@ -74,9 +74,9 @@ local enemy_script = {
                 event = function()
                     enemy({
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
-                        posY = state.pf_posY + 50,
+                        posY = state.pf_posY + state.pf_dimensionsY / 2,
                         sprite_key = "jerky",
-                        script = pool_test
+                        script = enemy_script.spread
                     }, thisLevel)
                 end,
             },
