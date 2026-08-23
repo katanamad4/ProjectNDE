@@ -101,7 +101,6 @@ local enemy_script = {
                     -- for key, ent in ipairs(thisLevel.entities.enemies) do
                     --     ent.dead = true
                     -- end
-                    print("enemies at event 3:" .. #thisLevel.entities.enemies)
                     if #thisLevel.entities.enemies == 0 then
                         incomplete = false
                         for key, ent in ipairs(thisLevel.entities.bullets) do
