@@ -2,13 +2,14 @@ vec = require("vector")
 
 local state = {}
 
+state.currentLevelName = "hierarchy_test"
 state.lives = 5
 state.movement_vecX = 0
 state.movement_vecY = 0
 state.movement_directionX = 0
 state.movement_directionY = 0
 state.movement_multiplier = 1.0
-state.focus_movement_multiplier = 0.6
+state.focus_movement_multiplier = 0.4
 state.paused = false
 state.player = {}
 state.debug = false
@@ -43,6 +44,7 @@ state.key_map = {
     z      = "shoot",
     kp2    = "time_plus",
     kp1    = "time_minus",
+    r      = "reset"
 }
 state.keys_down = {
     move_left = false,

@@ -1,4 +1,4 @@
-
+level = require "level"
 
 local keybinds = {}
 
@@ -84,6 +84,12 @@ keybinds.time_minus = {
     press = function()
         state.time_scale = state.time_scale - 0.1
     end
+}
+
+keybinds.reset = {
+    press = function()
+        state.current_level = level.load(state.currentLevelName)
+    end    
 }
 
 return keybinds
