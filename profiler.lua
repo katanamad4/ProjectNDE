@@ -27,9 +27,9 @@ function profiler.stop(title)
 end
 
 function profiler.print(self)
-	print("profiler")
+	print("Profiler")
 	for title, timeAvg in pairs(profiler.average) do
-			print(string.format("%s: %.1f %.1f", title, timeAvg, self.results[title]))
+			print(string.format("%s: avg:%.1fus last:%.1fus calls:%.0f ", title, timeAvg, self.results[title], self.count[title]))
 	end
 	print()
 end

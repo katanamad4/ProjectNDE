@@ -30,7 +30,7 @@ local enemy_script = {
     end,
     spread = function(self)
         if math.floor(self.age) % 3  == 0 then
-            for i = 1, 5, 1 do
+            for i = 1, 60, 1 do
                 vX, vY = vec.fromPolar(math.pi/5 * i * math.floor(self.age) % 7, 2)
                 aX, aY = vec.fromPolar(math.pi/5 * i, 0.01)
                 bullet({
@@ -42,7 +42,8 @@ local enemy_script = {
                     accelY = aY,
                     radius = 3, 
                     sprite_key = "energyball", 
-                    color  = "pink"
+                    color  = "pink",
+                    rotate_with_velocity = true,
                 }, thisLevel)
             end
         end
@@ -76,7 +77,7 @@ local enemy_script = {
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
                         posY = state.pf_posY + state.pf_dimensionsY / 2,
                         sprite_key = "jerky",
-                        script = enemy_script.spread
+                        script = enemy_script.spread,
                     }, thisLevel)
                 end,
             },

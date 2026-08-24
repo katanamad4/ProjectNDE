@@ -98,7 +98,7 @@ end
 
 function level.updateEntities(self, dt)
     for groupName, group in pairs(self.entities) do
-        profiler.start(groupName .. "UpDate")
+        -- profiler.start(groupName .. "UpDate")
         local key = 1
         while key <= #group do
             local ent = group[key]
@@ -122,7 +122,7 @@ function level.updateEntities(self, dt)
                 key = key + 1
             end
         end
-        profiler.stop(groupName .. "UpDate")
+        -- profiler.stop(groupName .. "UpDate")
     end
 end
 
