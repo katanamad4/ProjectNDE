@@ -70,7 +70,7 @@ bullet = function(data, level)
         profiler.stop("bUpd")
     end
 
-    entity.colision = data.colision or function(self, ent2)
+    entity.collision = data.collision or function(self, ent2)
     end
 
     entity.death = data.death or function(self)

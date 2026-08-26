@@ -31,11 +31,13 @@ player = function(data, level)
         self.invincible = 120
     end
 
-    entity.colision = data.colision or function(self, ent2)
+    entity.collision = data.collision or function(self, ent2)
         if self.invincible <= 0 then 
             self:hit()
         end
-        ent2.dead = true
+        if ent2.type == "bullet" then
+            ent2.dead = true
+        end
     end
 
     entity.draw = function(self)

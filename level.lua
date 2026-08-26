@@ -1,4 +1,4 @@
-local colision = require("colision")
+local collision = require("collision")
 local deep = require "deep"
 local profiler = require "profiler"
 
@@ -130,17 +130,17 @@ end
 
 function level:checkEntColisions(ent1)
     for key, ent2 in ipairs(self.entities[ent1.collides_with_group]) do
-        local colisionFunc = colision.findFunc(ent1, ent2)
-        if colisionFunc and colisionFunc(ent1, ent2) then
-            ent1:colision(ent2)
+        local collisionFunc = collision.findFunc(ent1, ent2)
+        if collisionFunc and collisionFunc(ent1, ent2) then
+            ent1:collision(ent2)
         end
     end
     if ent1.collides_with_group2 then
         for key, ent2 in ipairs(self.entities[ent1.collides_with_group2]) do
-            local colisionFunc = colision.findFunc(ent1, ent2)
+            local collisionFunc = collision.findFunc(ent1, ent2)
 
-            if colisionFunc and colisionFunc(ent1, ent2) then
-                ent1:colision(ent2)
+            if collisionFunc and collisionFunc(ent1, ent2) then
+                ent1:collision(ent2)
             end
         end
     end
