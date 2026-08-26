@@ -19,6 +19,9 @@ bullet = function(data, level)
     entity.accelY = data.accelY or 0
     entity.radius = data.radius or 3
     entity.rotate_with_velocity = data.rotate_with_velocity or false
+    entity.collides_with_group = data.collides_with_group or "player"
+    entity.collides_with_group2 = data.collides_with_group2     
+    entity.hitbox_type = data.hitbox_type or "circle"
     entity.angle = data.angle or vec.toPolar(entity.velX, entity.velY) 
     entity.sprite_key = data.sprite_key or "energyball"
     entity.sprite = state.sprites[entity.sprite_key]
@@ -50,8 +53,13 @@ bullet = function(data, level)
     entity.update = function(self)
         profiler.start("bUpd")
 
-        self.posX, self.posY = vec.mul(state.time_scale, vec.add(self.posX, self.posY, self.velX, self.velY))
-        self.velX, self.velY = vec.mul(state.time_scale, vec.add(self.velX, self.velY, self.accelX, self.accelY))
+    self.posX, self.posY = vec.add(
+        self.posX,
+        self.posY,
+        self.velX * state.time_scale,
+        self.velY * state.time_scale
+    )        
+    self.velX, self.velY = vec.mul(state.time_scale, vec.add(self.velX, self.velY, self.accelX, self.accelY))
         self.age = self.age + state.time_scale
         if self.rotate_with_velocity then
             self.angle = vec.toPolar(self.velX, self.velY)
@@ -62,7 +70,10 @@ bullet = function(data, level)
         profiler.stop("bUpd")
     end
 
-    entity.death = function(self)
+    entity.colision = data.colision or function(self, ent2)
+    end
+
+    entity.death = data.death or function(self)
         -- print("bullet dead!")
     end
     table.insert(level.entities.bullets, entity)

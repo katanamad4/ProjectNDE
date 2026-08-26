@@ -63,9 +63,6 @@ function level:update(dt)
     self:updateEntities(dt)
     profiler.stop("updEnt")
 
-    profiler.start("Colisions")
-    self:checkEntColisions()
-    profiler.stop("Colisions")
 
     profiler.start("Events")
     self:runEvents()
@@ -81,13 +78,15 @@ function level:draw()
     profiler.start("draw")
     for groupName, group in pairs(self.entities) do
         for key, ent in ipairs(group) do
-           self.layers[groupName]:queue(key, ent:draw())
+            self.layers[groupName]:queue(key, function()
+                ent:draw()
+            end)
         end
     end  
     self.layers.shots:draw()
     self.layers.player:draw()
-    self.layers.bullets:draw()
     self.layers.enemies:draw()
+    self.layers.bullets:draw()
     self.layers.hud:draw()
     self.layers.debug:draw()
     profiler.stop("draw")
@@ -105,6 +104,7 @@ function level.updateEntities(self, dt)
             -- print(key) --temp
             if ent.update then
                 ent:update(dt)
+                self:checkEntColisions(ent)
                 if not vec.posInPf(ent.posX, ent.posY , state.pf_entities_border_offset) then
                     ent.despawn = true
                 end 
@@ -126,22 +126,26 @@ function level.updateEntities(self, dt)
     end
 end
 
-function level.checkEntColisions(self)
-    for key, bullet in ipairs(self.entities.bullets) do
-        if colision.circle_circle(state.player, bullet) and state.player.invincible <= 0 then
-            state.player:hit()
-            bullet.dead = true
+
+
+function level:checkEntColisions(ent1)
+    for key, ent2 in ipairs(self.entities[ent1.collides_with_group]) do
+        local colisionFunc = colision.findFunc(ent1, ent2)
+        if colisionFunc and colisionFunc(ent1, ent2) then
+            ent1:colision(ent2)
         end
     end
-    for e_key, enemy in ipairs(self.entities.enemies) do 
-        for s_key, shot in ipairs(self.entities.shots) do
-            if colision.circle_circle(enemy, shot) and enemy.invincible <= 0 then
-                enemy:hit(shot.damage)
-                shot.dead = true
+    if ent1.collides_with_group2 then
+        for key, ent2 in ipairs(self.entities[ent1.collides_with_group2]) do
+            local colisionFunc = colision.findFunc(ent1, ent2)
+
+            if colisionFunc and colisionFunc(ent1, ent2) then
+                ent1:colision(ent2)
             end
         end
     end
 end
+
 
 
 function level.runEvents(self)

@@ -30,7 +30,7 @@ local enemy_script = {
     end,
     spread = function(self)
         if math.floor(self.age) % 3  == 0 then
-            for i = 1, 60, 1 do
+            for i = 1, 5, 1 do
                 vX, vY = vec.fromPolar(math.pi/5 * i * math.floor(self.age) % 7, 2)
                 aX, aY = vec.fromPolar(math.pi/5 * i, 0.01)
                 bullet({
@@ -84,7 +84,7 @@ local enemy_script = {
 
             {
                 -- event 2
-                sched = 120,
+                sched = 1000000,
                 event = function()
                     enemy({
                         posX = state.pf_posX + state.pf_dimensionsX / 2,

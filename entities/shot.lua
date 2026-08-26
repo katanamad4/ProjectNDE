@@ -25,7 +25,9 @@ shot = function(data, level)
     entity.despawn = false
     entity.damage = 1
     entity.age = 0 
-
+    entity.collides_with_group = data.collides_with_group or "enemies"
+    entity.collides_with_group2 = data.collides_with_group2     
+    entity.hitbox_type = data.hitbox_type or "circle"
 
      entity.draw = function(self)
         love.graphics.setColor(state.palette.red)
@@ -59,7 +61,11 @@ shot = function(data, level)
         end
     end
 
-    entity.death = function(self)
+    entity.colision = data.colision or function(self, ent2)
+        self.dead = true
+    end
+
+    entity.death = data.death or function(self)
         -- print "shot dead!"
     end
 

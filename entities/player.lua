@@ -1,5 +1,3 @@
-local vec = require("vector")
-
 local shot = require("entities/shot")
 
 
@@ -24,10 +22,20 @@ player = function(data, level)
     entity.invincible = data.invincible or 0
     entity.visible = true
     entity.sprite = state.sprites[entity.sprite_key]
+    entity.collides_with_group = data.collides_with_group or "bullets"
+    entity.collides_with_group2 = data.collides_with_group2 or "enemies"   
+    entity.hitbox_type = data.hitbox_type or "circle"
 
     entity.hit = function(self) 
         state.lives =  state.lives - 1
         self.invincible = 120
+    end
+
+    entity.colision = data.colision or function(self, ent2)
+        if self.invincible <= 0 then 
+            self:hit()
+        end
+        ent2.dead = true
     end
 
     entity.draw = function(self)

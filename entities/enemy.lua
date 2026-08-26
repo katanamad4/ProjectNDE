@@ -1,7 +1,3 @@
-local vec = require("vector")
-
-
-
 
 enemy = function(data, level)
     local entity = table.remove(level.pools.enemies)
@@ -28,6 +24,9 @@ enemy = function(data, level)
     entity.age = 0
     entity.dead = false
     entity.despawn = false
+    entity.collides_with_group = data.collides_with_group or "shots"
+    entity.collides_with_group2 = data.collides_with_group2 or "player"   
+    entity.hitbox_type = data.hitbox_type or "circle"
 
     entity.hit = function(self, damage)
         self.health = self.health - damage
@@ -65,6 +64,15 @@ enemy = function(data, level)
         if self.script then 
             self.script(self, level)
         end    
+    end
+
+    entity.colision = data.colision or function(self, ent2)
+        if ent2.damage then
+            self:hit(ent2.damage)
+        end
+    end
+
+    entity.death = data.death or function(self)
     end
 
     table.insert(level.entities.enemies, entity)

@@ -1,8 +1,10 @@
 
 state = require("state")
-local input = require("input")
+input = require("input")
 local debug_hud = require("debug_hud")
-local level = require("level")
+level = require("level")
+vec = require "vector"
+
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
