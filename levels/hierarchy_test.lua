@@ -71,7 +71,7 @@ local enemy_script = {
             -- segment 1
             {
                 --event 1
-                sched = 60,
+                sched = 200,
                 event = function()
                     enemy({
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
@@ -124,7 +124,7 @@ local enemy_script = {
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
                         posY = state.pf_posY + state.pf_dimensionsY / 2,
                         sprite_key = "jerky",
-                        script = enemy_script.pool_test
+                        script = enemy_script.tidal_sine
                     }, thisLevel)
                 end
             }

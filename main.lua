@@ -5,7 +5,6 @@ local debug_hud = require("debug_hud")
 level = require("level")
 vec = require "vector"
 
-
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
 function love.load(args)

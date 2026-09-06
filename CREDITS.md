@@ -4,6 +4,8 @@
 
 Created by: Team Infinitesimal
 
+Placeholder sprites by: FelineGonePostal
+
 ## Engine
 
 ### LÖVE

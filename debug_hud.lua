@@ -51,6 +51,14 @@ debug.entries = {
         love.graphics.print("enemies:" .. #state.current_level.entities, 10, y)
 
     end,
+    mouse = function(self, y)
+        if state.mouse_controls then
+            love.graphics.print("mouse control", 10, y)
+        else
+            love.graphics.print("keyboard control", 10, y)
+        end
+    end,
+
 
 }
 
