@@ -86,6 +86,25 @@ state.sprites = {
         scale = 0.28
     },
 }
+
+state.sourcesPerSound = 3
+
+state.sounds = {
+    ding1 = {
+        path ="assets/ding1.ogg",
+        source = {},
+    },
+    shoot1 = {
+        path = "assets/shoot1.ogg",
+        source = {},
+
+    },
+    shoot2 = {
+        path = "assets/shoot2.ogg",
+        source = {},
+    }
+}
+
 state.palette = {
     -- Neutrals
     white   = {1.0, 1.0, 1.0, 1.0},

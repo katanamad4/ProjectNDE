@@ -1,9 +1,9 @@
-
 state = require("state")
 input = require("input")
 local debug_hud = require("debug_hud")
 level = require("level")
 vec = require "vector"
+sound = require "sound"
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -18,6 +18,7 @@ function love.load(args)
     for key, data in pairs(state.sprites) do
         data.image =  love.graphics.newImage(data.path)
     end
+    sound.load()
     state.current_level = level.load(state.currentLevelName)
     love.mouse.setRelativeMode(true)
     state.rng = love.math.newRandomGenerator( 1337148867695242 )

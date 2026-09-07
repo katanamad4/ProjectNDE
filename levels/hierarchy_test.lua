@@ -30,6 +30,7 @@ local enemy_script = {
     end,
     spread = function(self)
         if math.floor(self.age) % 3  == 0 then
+
             for i = 1, 5, 1 do
                 vX, vY = vec.fromPolar(math.pi/5 * i * math.floor(self.age) % 7, 2)
                 aX, aY = vec.fromPolar(math.pi/5 * i, 0.01)

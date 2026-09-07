@@ -1,5 +1,5 @@
 local shot = require("entities/shot")
-
+local sound = require "sound"
 
 player = function(data, level)
     local entity = table.remove(level.pools.player)
@@ -98,6 +98,7 @@ player = function(data, level)
         end
         if state.keys_down.shooting then
             if state.time % 2 == 0 then
+                sound.play("shoot1", 0.05)
                 for i = -2, 2, 1 do
                     local vX, vY = vec.fromPolar(math.pi/2 * 3 + math.pi/36 * i, 20)
                     shot({
