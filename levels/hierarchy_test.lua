@@ -16,13 +16,13 @@ function level.load(thisLevel)
 
 local enemy_script = {
     tidal_sine = function(self)
-        if math.floor(self.age) % 2  == 0 then
-            for i = 1, 3, 1 do
+        if math.floor(self.age) % 5  == 0 then
+            for i = 1, 5, 1 do
                 bullet({
-                    posX = self.posX + math.sin(math.floor(self.age) / i * 0.15) * 250,
+                    posX = self.posX + math.sin(math.floor(self.age) / i * 0.1) * 250,
                     posY = self.posY,
                     velX = 0,
-                    velY = i + 2,
+                    velY = i + 1,
                     radius = 3, 
                     sprite_key = "energyball", 
                     color = "orange"
@@ -80,7 +80,6 @@ local enemy_script = {
             {
                 sched = 200,
                 event = function()
-                    sound.playMusic("rain_cradle")
                     enemy({
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
                         posY = state.pf_posY + state.pf_dimensionsY / 2,
@@ -92,7 +91,7 @@ local enemy_script = {
 
             
             {
-                sched = 500,
+                sched = 300,
                 incomplete = true,
                 event = function()
                     -- for key, ent in ipairs(thisLevel.entities.enemies) do
@@ -101,7 +100,7 @@ local enemy_script = {
                     if #thisLevel.entities.enemies == 0 then
                         incomplete = false
                         for key, ent in ipairs(thisLevel.entities.bullets) do
-                            ent.dead = true
+                            ent.despawn = true
                         end
                         thisLevel.currentSegment = 2
                         thisLevel.segmentTime = 0
@@ -128,7 +127,7 @@ local enemy_script = {
                 event = function()
                     enemy({
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
-                        posY = state.pf_posY + state.pf_dimensionsY / 2,
+                        posY = state.pf_posY + state.pf_dimensionsY / 3,
                         sprite_key = "jerky",
                         script = enemy_script.tidal_sine
                     }, thisLevel)

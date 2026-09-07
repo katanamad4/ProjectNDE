@@ -24,7 +24,7 @@ state.pf_posY = (state.window_dimensionsY - state.pf_dimensionsY) / 2
 
 state.masterVolume = 0.5
 state.sfxVolume = 1
-state.musicVolume = 1
+state.musicVolume = 0.2
 
 -- state.pf_dimensionsX = state.window_dimensionsX - 20
 -- state.pf_dimensionsY = state.window_dimensionsY - 20
@@ -106,7 +106,11 @@ state.sounds = {
     shoot2 = {
         path = "assets/shoot2.ogg",
         source = {},
-    }
+    },
+    blunt_hit = {
+        path = "assets/blunt_hit.ogg",
+        source = {},
+    },
 }
 
 state.music = {

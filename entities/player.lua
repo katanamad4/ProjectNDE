@@ -108,7 +108,8 @@ player = function(data, level)
                         velY = vY,
                         radius = 3,
                         sprite_key = "knife",
-                        color = "transparent"
+                        color = "transparent",
+                        damage = 10 --temp
                     }, level)
                 end
             end

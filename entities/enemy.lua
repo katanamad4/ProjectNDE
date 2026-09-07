@@ -1,3 +1,4 @@
+sound = require "sound"
 
 enemy = function(data, level)
     local entity = table.remove(level.pools.enemies)
@@ -76,6 +77,8 @@ enemy = function(data, level)
     end
 
     entity.death = data.death or function(self)
+        state.sounds.blunt_hit.source[1]:setVolume(2)
+        sound.play("blunt_hit")
     end
 
     table.insert(level.entities.enemies, entity)
