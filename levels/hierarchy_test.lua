@@ -4,6 +4,8 @@ local playfield = require("entities/playfield")
 local enemy = require("entities/enemy")
 local vec = require("vector")
 local deep = require "deep"
+local sound = require "sound"
+
 
 local level = {}
 
@@ -69,11 +71,16 @@ local enemy_script = {
 
     thisLevel.segments = {
         {
-            -- segment 1
             {
-                --event 1
+                sched = 0,
+                event = function()
+                    sound.playMusic("rain_cradle")
+                end,
+            },
+            {
                 sched = 200,
                 event = function()
+                    sound.playMusic("rain_cradle")
                     enemy({
                         posX = state.pf_posX + state.pf_dimensionsX / 2,
                         posY = state.pf_posY + state.pf_dimensionsY / 2,
@@ -83,20 +90,8 @@ local enemy_script = {
                 end,
             },
 
+            
             {
-                -- event 2
-                sched = 1000000,
-                event = function()
-                    enemy({
-                        posX = state.pf_posX + state.pf_dimensionsX / 2,
-                        posY = state.pf_posY + state.pf_dimensionsY / 2,
-                        sprite_key = "jerky",
-                        script = enemy_script.tidal_sine
-                    }, thisLevel)
-                end,
-            },
-            {
-                -- event 3
                 sched = 500,
                 incomplete = true,
                 event = function()
@@ -113,7 +108,17 @@ local enemy_script = {
                     end
                 end,
             },
-
+            {
+                sched = 1000000,
+                event = function()
+                    enemy({
+                        posX = state.pf_posX + state.pf_dimensionsX / 2,
+                        posY = state.pf_posY + state.pf_dimensionsY / 2,
+                        sprite_key = "jerky",
+                        script = enemy_script.tidal_sine
+                    }, thisLevel)
+                end,
+            },
         },
 
         {

@@ -22,6 +22,10 @@ state.pf_dimensionsY = 704
 state.pf_posX = (state.window_dimensionsX - state.pf_dimensionsX) / 2
 state.pf_posY = (state.window_dimensionsY - state.pf_dimensionsY) / 2
 
+state.masterVolume = 0.5
+state.sfxVolume = 1
+state.musicVolume = 1
+
 -- state.pf_dimensionsX = state.window_dimensionsX - 20
 -- state.pf_dimensionsY = state.window_dimensionsY - 20
 -- state.pf_posX = 20
@@ -87,7 +91,7 @@ state.sprites = {
     },
 }
 
-state.sourcesPerSound = 3
+state.sourcesPerSound = 3 --how many of the same sound can play at the same time
 
 state.sounds = {
     ding1 = {
@@ -102,6 +106,12 @@ state.sounds = {
     shoot2 = {
         path = "assets/shoot2.ogg",
         source = {},
+    }
+}
+
+state.music = {
+    rain_cradle = {
+        path = "assets/rain_cradle.mp3",
     }
 }
 

@@ -68,6 +68,8 @@ function level:update(dt)
     self:runEvents()
     profiler.stop("Events")
 
+    sound.changeSourcesVolume()
+
     self.segmentTime = self.segmentTime + 1
     state.time = state.time + state.time_scale
     state.player = state.current_level.entities.player[1]
