@@ -4,7 +4,6 @@ local debug_hud = require("debug_hud")
 level = require("level")
 vec = require "vector"
 sound = require "sound"
-local console = require "console"
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -33,7 +32,6 @@ end
  
 love.keypressed = function(key, scancode, isrepeat)
     input.press(key)
-    console.keypressed(key, scancode, isrepeat)
 
 end
 
@@ -52,11 +50,9 @@ love.draw = function()
     if state.debug then
         debug_hud.draw()
     end
-    console.draw()
 end
 
 function love.textinput(text)
-    console.textinput(text)
 end
 
 love.update = function(dt)
