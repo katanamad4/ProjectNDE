@@ -30,6 +30,7 @@ bullet = function(data, level)
     entity.despawn = false
     entity.dead = false
     entity.age = 0 
+    entity.grazed = false
     profiler.stop("bInit")
 
     entity.draw = function(self)

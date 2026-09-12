@@ -18,6 +18,15 @@ collision.aabbAabb = function(a, b) --unused
            b.Y < a.Y + a.h
 end
 
+collision.circleCircleGraze = function(aradius, aposX, aposY, bposX, bposY)
+    if aradius and aposX and bposX and aposY and bposY then 
+        local dx, dy = vec.sub(aposX, aposY, bposX, bposY)
+        return dx*dx + dy*dy < aradius*aradius
+    else
+        error("invalid arguments for collision ")
+    end
+end
+
 collision.functions = {
     circle = {
         circle = collision.circleCircle,

@@ -40,6 +40,13 @@ player = function(data, level)
         end
     end
 
+    entity.graze = function(bullet)
+        bullet.grazed = true
+        state.graze = state.graze + 1
+        state.score_mul = state.score_mul + 0.01
+        sound.play("shoot1", 0.01) 
+    end
+
     entity.draw = function(self)
         if not self.sprite or not self.sprite.image then love.graphics.print("NO PLAYER SPRITE", 10, 200) end
         if self.invincible > 0 and state.time % 4 == 0 then 
@@ -69,7 +76,7 @@ player = function(data, level)
                 if state.debug then
                     love.graphics.setColor(state.palette.blue)
                     love.graphics.circle("fill", self.posX, self.posY, self.radius)
-
+                    love.graphics.circle("line", self.posX, self.posY, state.graze_radius)
                 end
             end
         end
@@ -98,7 +105,7 @@ player = function(data, level)
         end
         if state.keys_down.shooting then
             if state.time % 2 == 0 then
-                sound.play("shoot1", 0.05)
+                sound.play("shoot2", 0.05)
                 for i = -2, 2, 1 do
                     local vX, vY = vec.fromPolar(math.pi/2 * 3 + math.pi/36 * i, 20)
                     shot({

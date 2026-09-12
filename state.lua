@@ -15,15 +15,18 @@ state.player = {}
 state.debug = false
 state.current_level = {}
 state.score = 0
+state.score_mul = 1
+state.graze = 0
 state.time = 0
 state.time_scale = 1
+state.graze_radius = 20
 state.window_dimensionsX, state.window_dimensionsY = love.window.getMode( )
 state.pf_dimensionsX = 528
 state.pf_dimensionsY = 704
 state.pf_posX = (state.window_dimensionsX - state.pf_dimensionsX) / 2
 state.pf_posY = (state.window_dimensionsY - state.pf_dimensionsY) / 2
 
-state.masterVolume = 0
+state.masterVolume = 0.5
 state.sfxVolume = 1
 state.musicVolume = 0.2
 
@@ -97,28 +100,28 @@ state.sprites = {
 state.sourcesPerSound = 3 --how many of the same sound can play at the same time
 
 state.sounds = {
-    ding1 = {
-        path ="assets/ding1.ogg",
-        source = {},
-    },
     shoot1 = {
         path = "assets/shoot1.ogg",
         source = {},
+        volume = 1,
 
     },
     shoot2 = {
         path = "assets/shoot2.ogg",
         source = {},
+        volume = 2,
     },
     blunt_hit = {
         path = "assets/blunt_hit.ogg",
         source = {},
+        volume = 1,
     },
 }
 
 state.music = {
     rain_cradle = {
         path = "assets/rain_cradle.mp3",
+        volume = 1,
     }
 }
 

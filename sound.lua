@@ -15,6 +15,7 @@ function sound.load()
 end
 
 function sound.play(soundName, pitchRange)
+	assert(state.sounds[soundName], "no sound named " .. soundName)
 	for key, source in ipairs(state.sounds[soundName].source) do
 		if not source:isPlaying() then
 			if pitchRange then
@@ -44,11 +45,11 @@ end
 function sound.changeSourcesVolume()
 	for i = 1, state.sourcesPerSound, 1 do 
         for key, data in pairs(state.sounds) do
-            data.source[i]:setVolume(state.sfxVolume * state.masterVolume)
+            data.source[i]:setVolume(state.sfxVolume * state.masterVolume * data.volume)
         end
     end
     for key, data in pairs(state.music) do
-    	data.source:setVolume(state.musicVolume * state.masterVolume)
+    	data.source:setVolume(state.musicVolume * state.masterVolume * data.volume)
     end
 end
 

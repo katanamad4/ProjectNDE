@@ -65,7 +65,7 @@ shot = function(data, level)
     end
 
     entity.death = data.death or function(self)
-        state.score = state.score + 5
+        state.score = state.score + 1 * state.score_mul
     end
 
     table.insert(level.entities.shots, entity)   

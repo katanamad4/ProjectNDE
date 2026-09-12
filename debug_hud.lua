@@ -3,7 +3,7 @@
 local debug = {}
 
 debug.line_spacing = 15
-
+debug.font = love.graphics.newFont(12)
 debug.entries = {
     fps = function(self, y)
             love.graphics.print("FPS: " .. love.timer.getFPS(), 10, y)
@@ -67,13 +67,13 @@ debug.entries = {
 function debug.draw()
     
     love.graphics.setColor(state.palette.green)
+    love.graphics.setFont(debug.font)
     local n = 0
     for _, entry in pairs(debug.entries) do
         n = n + 1
         entry(debug, n * debug.line_spacing + 5)
     end
 
-    love.graphics.setColor(state.palette.green)
     love.graphics.rectangle("line", 0, 0, state.window_dimensionsX, state.window_dimensionsY)
     -- the way this works is mega shit,
     -- i should make a metatable to add to the y of the next line each time a line is printed    

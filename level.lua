@@ -107,6 +107,9 @@ function level.updateEntities(self, dt)
             if ent.update then
                 ent:update(dt)
                 self:checkEntColisions(ent)
+                if ent.type == "player" then
+                    self:check_for_graze(ent)
+                end
                 if not vec.posInPf(ent.posX, ent.posY , state.pf_entities_border_offset) then
                     ent.despawn = true
                 end 
@@ -131,6 +134,8 @@ end
 
 
 function level:checkEntColisions(ent1)
+    -- if player then check for graze and rest of colisions
+
     for key, ent2 in ipairs(self.entities[ent1.collides_with_group]) do
         local collisionFunc = collision.findFunc(ent1, ent2)
         if collisionFunc and collisionFunc(ent1, ent2) then
@@ -140,7 +145,6 @@ function level:checkEntColisions(ent1)
     if ent1.collides_with_group2 then
         for key, ent2 in ipairs(self.entities[ent1.collides_with_group2]) do
             local collisionFunc = collision.findFunc(ent1, ent2)
-
             if collisionFunc and collisionFunc(ent1, ent2) then
                 ent1:collision(ent2)
             end
@@ -148,6 +152,13 @@ function level:checkEntColisions(ent1)
     end
 end
 
+function level:check_for_graze(player)
+    for key, bullet in ipairs(self.entities.bullets) do
+        if not bullet.grazed and collision.circleCircleGraze(state.graze_radius, player.posX, player.posY, bullet.posX, bullet.posY ) then
+            player.graze(bullet)
+        end
+    end
+end
 
 
 function level.runEvents(self)

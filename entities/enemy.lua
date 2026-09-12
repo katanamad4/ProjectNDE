@@ -69,10 +69,8 @@ enemy = function(data, level)
     end
 
     entity.collision = data.collision or function(self, ent2)
-        if ent2.damage then
+        if ent2.type == "shot" and ent2.damage then
             self:hit(ent2.damage)
-        end
-        if ent2.type == "shot" then
             ent2.dead = true
         end
     end
