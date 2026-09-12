@@ -34,10 +34,11 @@ enemy = function(data, level)
     end
 
     entity.draw = function(self)
-        if not self.sprite or not self.sprite.image then love.graphics.print("NO SPRITE", 10, 200) end
-        love.graphics.print("enemy health" .. self.health, 10, 200)
-        if self.sprite and self.sprite.image then
+        if not self.sprite or not self.sprite.image then 
+            love.graphics.print("NO ENEMY SPRITE", 10, 200) 
+        else
             love.graphics.setColor(state.palette.white)
+            love.graphics.print(self.health, self.posX - 50, self.posY - 50)-- make this stuff render above bullets
             love.graphics.draw(
             self.sprite.image,
             self.posX,

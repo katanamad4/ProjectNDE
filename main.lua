@@ -4,6 +4,7 @@ local debug_hud = require("debug_hud")
 level = require("level")
 vec = require "vector"
 sound = require "sound"
+local console = require "console"
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -29,13 +30,15 @@ end
 function love.resize(w, h)
     -- ...
 end
+ 
+love.keypressed = function(key, scancode, isrepeat)
+    input.press(key)
+    console.keypressed(key, scancode, isrepeat)
 
-love.keypressed = function(pressed_key)
-  input.press(pressed_key)
 end
 
 love.keyreleased = function(released_key)
-  input.release(released_key)
+    input.release(released_key)
 end
 
 love.mousemoved = function(X, Y, dX, dY)
@@ -49,13 +52,16 @@ love.draw = function()
     if state.debug then
         debug_hud.draw()
     end
-
-
+    console.draw()
 end
 
+function love.textinput(text)
+    console.textinput(text)
+end
 
 love.update = function(dt)
-    input.recompute_movement()
-    state.current_level:update(dt)
-
+    if not state.paused then
+        input.recompute_movement()
+        state.current_level:update(dt)
+    end
 end

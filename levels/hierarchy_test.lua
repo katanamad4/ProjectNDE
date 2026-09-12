@@ -5,7 +5,7 @@ local enemy = require("entities/enemy")
 local vec = require("vector")
 local deep = require "deep"
 local sound = require "sound"
-
+local score_display =  require "entities/score_display"
 
 local level = {}
 
@@ -75,6 +75,7 @@ local enemy_script = {
                 sched = 0,
                 event = function()
                     sound.playMusic("rain_cradle")
+                    score_display({}, thisLevel)
                 end,
             },
             {

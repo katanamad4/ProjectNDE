@@ -92,4 +92,15 @@ keybinds.reset = {
     end    
 }
 
+keybinds.console = {
+    press = function()
+        debug.debug()
+    end
+}
+keybinds.pause = {
+    press = function()
+        state.paused = not state.paused
+    end
+}
+
 return keybinds

@@ -41,7 +41,7 @@ player = function(data, level)
     end
 
     entity.draw = function(self)
-        if not self.sprite or not self.sprite.image then love.graphics.print("NO SPRITE", 10, 200) end
+        if not self.sprite or not self.sprite.image then love.graphics.print("NO PLAYER SPRITE", 10, 200) end
         if self.invincible > 0 and state.time % 4 == 0 then 
             self.visible = not self.visible
         end
@@ -109,7 +109,7 @@ player = function(data, level)
                         radius = 3,
                         sprite_key = "knife",
                         color = "transparent",
-                        damage = 10 --temp
+                        damage = 1 --temp
                     }, level)
                 end
             end

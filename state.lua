@@ -14,6 +14,7 @@ state.paused = false
 state.player = {}
 state.debug = false
 state.current_level = {}
+state.score = 0
 state.time = 0
 state.time_scale = 1
 state.window_dimensionsX, state.window_dimensionsY = love.window.getMode( )
@@ -22,7 +23,7 @@ state.pf_dimensionsY = 704
 state.pf_posX = (state.window_dimensionsX - state.pf_dimensionsX) / 2
 state.pf_posY = (state.window_dimensionsY - state.pf_dimensionsY) / 2
 
-state.masterVolume = 0.5
+state.masterVolume = 0
 state.sfxVolume = 1
 state.musicVolume = 0.2
 
@@ -48,7 +49,9 @@ state.key_map = {
     z      = "shoot",
     kp2    = "time_plus",
     kp1    = "time_minus",
-    r      = "reset"
+    r      = "reset",
+    kp0    = "console",
+    p      = "pause",
 }
 state.keys_down = {
     move_left = false,

@@ -50,7 +50,7 @@ level.load = function(name)
     for k, v in pairs(self.pools) do
         print(k, v , #v)
     end
-
+    state.score = 0
     level_module.load(self)
 
     return self

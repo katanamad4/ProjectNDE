@@ -65,7 +65,7 @@ shot = function(data, level)
     end
 
     entity.death = data.death or function(self)
-        -- print "shot dead!"
+        state.score = state.score + 5
     end
 
     table.insert(level.entities.shots, entity)   
